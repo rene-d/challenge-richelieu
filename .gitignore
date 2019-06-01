@@ -5,6 +5,9 @@ core
 .gdb_history
 peda-session-*.txt
 
+/defi1/sl
+/defi2/response
+
 richelieu.gpr
 richelieu.rep/
 *.lock
