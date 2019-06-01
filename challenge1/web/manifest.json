@@ -1,0 +1,15 @@
+{
+  "short_name": "CTF",
+  "name": "Challenge Richelieu",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "192x192",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#20C20E",
+  "background_color": "#000000"
+}
