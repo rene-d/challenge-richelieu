@@ -183,7 +183,7 @@ Un coup de `strings` fait ressortir la chaîne de caractères suivante :
 ```
 $Info: This file is packed with the ALD executable packer http://upx.sf.net $
 ```
-C'est évidemment `...the UPX executable packer...`. On va changer ALD en UPX.
+C'est évidemment `...the UPX executable packer...`. On va changer ALD (_AttrapeLeDrapeau_ !) en UPX.
 
 ```bash
 zsteg --extract b1,rgb,lsb,yx lsb_RGB.png > extract.hex

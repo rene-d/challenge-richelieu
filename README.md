@@ -98,7 +98,7 @@ docker build -t dgse:stretch .
 
 Pour lancer le container:
 ```bash
-docker run --name dgse -h dgse --rm -ti -v $HOME/dgse:/dgse --cap-add=SYS_PTRACE dgse:stretch
+docker run --name dgse --hostname dgse --rm -ti -v $HOME/dgse:/dgse --cap-add=SYS_PTRACE dgse:stretch
 ```
 
 La _capability_ `SYS_PTRACE` est nécessaire pour gdb, strace, etc.
