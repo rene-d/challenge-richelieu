@@ -20,11 +20,11 @@ Reconstitution des fichiers source du challenge
 
 Description | Fichier
 ----------- | -------
-texte du PDF | [intro.txt](challenge1/results/intro.txt)
-1er dessin de Richelieu | [Richelieu.jpg](challenge1/results/Richelieu.jpg)
+texte du PDF | [intro.txt](challenge1/results/Richelieu.txt)
+1er dessin de Richelieu | [Richelieu.jpg](challenge1/results/data)
 clé privée RSA | [priv.key](challenge1/results/priv.key)
 mot de passe du PNG | [motDePasseGPG.txt](challenge1/results/motDePasseGPG.txt)
-2ème dessin de Richelieu | [lsb_RGB.jpg](challenge1/results/lsb_RGB.jpg) ⚠️
+2ème dessin de Richelieu | [Richelieu.ppg](challenge1/results/lsb_RGB.png) ⚠️
 crack-me pour le mot de passe de suite.zip | [prog.c](challenge2/prog.c)
 suite du challenge | [suite.txt](challenge1/results/suite.txt)
 CTF défi1 | [defi1.c](defi1/defi1.c)
