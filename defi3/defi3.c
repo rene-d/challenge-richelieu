@@ -2,6 +2,9 @@
  * Code source de prog.bin reconstitué avec Ghidra
  */
 
+// pour compiler:
+//  cc -no-pie defi3.c
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

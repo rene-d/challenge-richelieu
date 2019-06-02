@@ -79,7 +79,7 @@ Le code pour calculer le mot de passe qui va fonctionner est simple:
     mot_de_passe[i] = 0;
 ```
 
-Le programme [prog.c](src/prog.c) est une version reconstituée et compilable de `prog.bin`.
+Le programme [prog.c](prog.c) est une version reconstituée et compilable de `prog.bin`.
 
 Le programme [crack.c](crack.c) reconstitue le mot de passe, l'affiche et le vérifie avec `prog.bin`.
 

@@ -32,7 +32,7 @@ De plus `checksec` permet de vérifier que la stack est exécutable.
 
 ### Provoquer un buffer overflow
 
-Lorsque `scanf()` va stocker la chaine de caractères dans `local_38` (cf. [FUN_0040086d](src/FUN_0040086d.c)), si la longueur est supérieure à 48, la fonction va écraser la pile (i.e. écrire des octets là où elle ne devrait pas).
+Lorsque `scanf()` va stocker la chaine de caractères dans `password` (cf. [saisie()](defi2.c)), si la longueur est supérieure à 48, la fonction va écraser la pile (i.e. écrire des octets là où elle ne devrait pas).
 
 Lors du retour de la fonction, le processeur va exécuter `leave` et `ret`.
 
@@ -62,11 +62,11 @@ Il faut que le _gadget_ respecte certaines conditions dûes à `scanf()`: son ad
 
 ___TODO : dessiner de la stack___
 
-Le buffer overflow va écrire dans ce qu'il y a au-dessus dans la pile, à savoir le gros buffer `local_418` de la fonction `main()`.
+Le buffer overflow va écrire dans ce qu'il y a au-dessus dans la pile, à savoir le gros buffer `buffer` de la fonction `main()`.
 
 Ainsi, les octets 64 et suivants du password vont se retrouver dans le login.
 
-A la sortie de la fonction de saisie `FUN_0040086d`, `rax` est chargé avec le pointeur du buffer du login (cf. `return pcParm1;`)
+A la sortie de la fonction de saisie `saisie()`, `rax` est chargé avec le pointeur du buffer du login (cf. `return buffer;`)
 
 Le `leave` va sauter les octets 48 à 55 octets du password.
 
