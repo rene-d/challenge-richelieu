@@ -5,7 +5,7 @@ https://www.challengecybersec.fr
 
 ## Analyse de binaire
 
-Le programme ELF a été compilé en statique (aka. `gcc -static prog.c`):
+Le programme ELF a été compilé en statique (aka. `gcc -static -o prog.bin prog.c`):
 ```
 root@dgse:/dgse/challenge2# ldd prog.bin
 	not a dynamic executable
@@ -79,7 +79,7 @@ Le code pour calculer le mot de passe qui va fonctionner est simple:
     mot_de_passe[i] = 0;
 ```
 
-Le programme [main.c](src/main.c) est une version reconstituée et compilable de `prog.bin`.
+Le programme [prog.c](src/prog.c) est une version reconstituée et compilable de `prog.bin`.
 
 Le programme [crack.c](crack.c) reconstitue le mot de passe, l'affiche et le vérifie avec `prog.bin`.
 
