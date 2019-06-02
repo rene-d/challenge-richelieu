@@ -44,9 +44,11 @@ permet de confirmer et de vraiment commencer le challenge.
 
 Le PDF n'a qu'un texte visible, une introduction du challenge expliquant la référence à [Armand Jean du Plessis, cardinal de Richelieu](https://fr.wikipedia.org/wiki/Armand_Jean_du_Plessis_de_Richelieu).
 
-    Richelieu
-    L’histoire de la cryptologie serait incomplète sans citer Richelieu qui, dès 1624, sut recruter les meilleurs spécialistes en mathématiques. Il a ainsi pu fonder, par la suite, ce qui est considéré aujourd’hui comme l'un des tout premiers bureaux du chiffre en Europe.
-    Lors du siège de La Rochelle (1627-1628), la cryptanalyse des messages des Huguenots lui permit d’anticiper l’arrivée des Anglais venus aider ces derniers par la mer. En octobre 1628, la ville finira par capituler sans condition.
+### Texte d'introduction
+
+>    Richelieu
+>    L’histoire de la cryptologie serait incomplète sans citer Richelieu qui, dès 1624, sut recruter les meilleurs spécialistes en mathématiques. Il a ainsi pu fonder, par la suite, ce qui est considéré aujourd’hui comme l'un des tout premiers bureaux du chiffre en Europe.
+>    Lors du siège de La Rochelle (1627-1628), la cryptanalyse des messages des Huguenots lui permit d’anticiper l’arrivée des Anglais venus aider ces derniers par la mer. En octobre 1628, la ville finira par capituler sans condition.
 
 ## Exploitation du document PDF
 
