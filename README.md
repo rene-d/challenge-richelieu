@@ -7,7 +7,9 @@ https://www.challengecybersec.fr
 
 <div align="center">
 <!-- https://www.defense.gouv.fr/var/dicod/storage/images/base-de-medias/images/dgse-nouveau/challenge-richelieu/9669126-1-fre-FR/challenge-richelieu.jpg -->
+<a href="https://www.challengecybersec.fr">
 <img src="challenge-richelieu_article_pleine_colonne.jpg" alt="challenge Richelieu">
+</a>
 </div>
 <br/>
 
