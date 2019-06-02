@@ -47,7 +47,9 @@ Le PDF n'a qu'un texte visible, une introduction du challenge expliquant la réf
 ### Texte d'introduction
 
 >    Richelieu
+
 >    L’histoire de la cryptologie serait incomplète sans citer Richelieu qui, dès 1624, sut recruter les meilleurs spécialistes en mathématiques. Il a ainsi pu fonder, par la suite, ce qui est considéré aujourd’hui comme l'un des tout premiers bureaux du chiffre en Europe.
+
 >    Lors du siège de La Rochelle (1627-1628), la cryptanalyse des messages des Huguenots lui permit d’anticiper l’arrivée des Anglais venus aider ces derniers par la mer. En octobre 1628, la ville finira par capituler sans condition.
 
 ## Exploitation du document PDF
