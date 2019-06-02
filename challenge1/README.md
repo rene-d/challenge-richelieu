@@ -210,7 +210,7 @@ chmod a+x prog.bin
 
 On obtient finalement un exécutable `prog.bin` de 297492 octets.
 
-Ce programme vérifie un mot de passe (celui de `suite.zip`): c'est un _cracke-me_.
+Ce programme vérifie un mot de passe (celui de `suite.zip`): c'est un _crack-me_.
 
 
 [Suite...](../challenge2/README.md)
