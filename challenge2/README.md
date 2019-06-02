@@ -79,7 +79,9 @@ Le code pour calculer le mot de passe qui va fonctionner est simple:
     mot_de_passe[i] = 0;
 ```
 
-Le programme [main.c](./main.c) est une version reconstituée de `prog.bin` avec une fonction `crack()` qui affiche le mot de passe trouvé.
+Le programme [main.c](src/main.c) est une version reconstituée et compilable de `prog.bin`.
+
+Le programme [crack.c](crack.c) reconstitue le mot de passe, l'affiche et le vérifie avec `prog.bin`.
 
 Le mot de passe est donc: `DGSE{g456@g5112bgyfMnbVXw.llM}`
 
@@ -95,6 +97,9 @@ ssh defi1.challengecybersec.fr -l defi1 -p 2222
 mot de passe : DGSE{2f77c517b06f1cd1ce864f79f41f25ca8874413c8c1204f7ec9c6728c87f270a}
 ```
 
+On peut remarquer que le mot de passe est vraisemblablement construit avec un SHA256.
+
+[Suite...](../defi1/README.md)
 
 ---
 *rene-d 26 mai 2019*

@@ -112,7 +112,7 @@ docker exec -ti dgse bash
 
 A adapter en fonction de l'emplacement du dépôt (`~/dgse` dans la commande ci-dessus).
 
-Le script shell [dgse.sh](./dgse.sh) est un wrapper à ces commandes.
+Le script shell [dgse.sh](dgse.sh) est un wrapper à ces commandes.
 
 ---
 *rene-d mai 2019*

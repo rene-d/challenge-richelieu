@@ -154,7 +154,7 @@ Pour vous renseigner sur les métiers que nous recherchons : https://www.defense
 * [Heap Exploitation](https://heap-exploitation.dhavalkapil.com)
 * [Writeup CTF RHME3: exploitation](https://ktln2.org/2017/08/31/rhme3-exploitation-writeup/)
 
-[response.py](./response.py) et [go](./go) sont des scripts utilisés lors de la mise au point.
+[response.py](response.py) et [go](go) sont des scripts utilisés lors de la mise au point.
 
 ---
 *rene-d 29 mai 2019*

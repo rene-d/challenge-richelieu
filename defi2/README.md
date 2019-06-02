@@ -1,4 +1,5 @@
 # Challenge Richelieu de la DGSE - défi 2
+
 https://www.challengecybersec.fr
 
 ## Pour se connecter à la machine du défi
@@ -18,6 +19,8 @@ On récupère `prog.bin` de la même manière que le [défi 1](../defi1/README.m
 ## La vulnérabilité
 
 La lecture du code source montre un appel `scanf()` (_qui est un nid à bugs_) avec `%s` comme format avec un buffer destination de 48 octets.
+
+On aurait pu également utiliser `ltrace` pour analyser les appels système.
 
 Le `scanf()` est utilisé pour lire le mot de passe. La vulnérabilité est là. Et l'angle d'attaque un mot de passe de plus de 48 octets.
 
@@ -86,6 +89,7 @@ Et le tour est joué :)
 Le programme plante après, mais ce n'est pas grave, on a capturé le drapeau.
 
 ### Comprendre avec gdb
+
 Le fichier `.gdbinit` créé par le script [response.py](response.py) qui prépare l'attaque permet de suivre pas-à-pas le buffer overflow.
 
 Au premier breakpoint, on est avant `fgets()`. Faire `ni` pour voir le login lu. Puis `c`.
@@ -95,6 +99,7 @@ Au deuxième breakpoint, on est avant `scanf()`. Faire `ni` pour voir le passwor
 Au troisème breakpoint, on est au moment du `ret`. Faire `si` jusqu'au `call rax`. On arrive à l'appel de `system()`.
 
 ## Le drapeau
+
 ```
 Suite du challenge Richelieu :
 
@@ -102,6 +107,8 @@ ssh defi3.challengecybersec.fr -l defi3 -p 2222
 
 mot de passe : DGSE{?uo20tPO4(o=A=dX3njr2y{emZQodR}
 ```
+
+[Suite...](../defi3/README.md)
 
 ---
 *rene-d 27 mai 2019*
