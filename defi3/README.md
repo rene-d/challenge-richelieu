@@ -75,6 +75,7 @@ En revanche les allocation/désallocation sont mal gérées.
 ### L'attaque en six étapes
 
 #### étape 1
+
 Allouer un élément de manière à ce que le `malloc()` de `nom` soit de même taille que le `malloc()` de `struct element` (soit `0x10` octets)
 
 On aura en mémoire trois chunks (en plus des chunks déjà alloués):
@@ -82,6 +83,7 @@ On aura en mémoire trois chunks (en plus des chunks déjà alloués):
 ![chunks](chunks1.png)
 
 #### étape 2
+
 Détruire le nom (menu option 3). Cela va faire un `free()` sur le nom et mettre le chunk (`02551548` dans l'exemple ci-dessus obtenu avec [villoc](https://github.com/wapiflapi/villoc), `0x2277550` dans la session gdb ci-dessous) dans la liste des *fastbins* de malloc, avec la commande [heap bins](https://gef.readthedocs.io/en/latest/commands/heap/) de [GEF](https://github.com/hugsy/gef).
 
 ![chunks](chunks2.png)
@@ -89,11 +91,13 @@ Détruire le nom (menu option 3). Cela va faire un `free()` sur le nom et mettre
 ![chunks](bins.png)
 
 #### étape 3
+
 Créer un nouvel élément. Le `malloc(sizeof(struct element))` va réutiliser le chunk libéré et on va pouvoir jouer avec les pointeurs via le changement de nom (menu option 4).
 
 ![chunks](chunks3.png)
 
 #### étape 4
+
 On met comme nouveau nom les octets qui correspondent à l'entrée de `free()` dans la table de relocation. `0x602018` est ok: pas de `\n`, pas de `\0`.
 
 Cette adresse peut s'obtenir automatiquement dans un script Python avec [pwntools](https://github.com/Gallopsled/pwntools#readme) :
@@ -126,6 +130,7 @@ system_addr = free_addr - offset_free_system
 ```
 
 #### étape 6
+
 On écrit l'adresse de `system()` à la place du nom du deuxième élément. Son adresse en fait est l'entrée de `free()` dans la [GOT](https://en.wikipedia.org/wiki/Global_Offset_Table) telle qu'elle a été positionnée lors de l'étape 2.
 
 Ainsi au lieu d'appeler `free()`, le programme va appeler `system()` !
@@ -133,6 +138,7 @@ Ainsi au lieu d'appeler `free()`, le programme va appeler `system()` !
 Il suffit alors de demander la destruction de l'`id` de l'élément 0, dans lequel on aura placé `cat drapeau.txt` (ou `chmod 666 drapeau.txt`).
 
 ## Le drapeau
+
 ```
 Félicitations à vous, vous avez réussi l'intégralité du challenge Richelieu organisé par la DGSE !
 Vous avez la perspicacité et le profil pour relever les défis technologiques au sein de nos équipes.
@@ -147,6 +153,8 @@ Pour vous renseigner sur les métiers que nous recherchons : https://www.defense
 * [CWE-416: Use After Free](https://cwe.mitre.org/data/definitions/416.html)
 * [Heap Exploitation](https://heap-exploitation.dhavalkapil.com)
 * [Writeup CTF RHME3: exploitation](https://ktln2.org/2017/08/31/rhme3-exploitation-writeup/)
+
+[response.py](./response.py) et [go](./go) sont des scripts utilisés lors de la mise au point.
 
 ---
 *rene-d 29 mai 2019*

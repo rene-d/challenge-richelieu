@@ -1,7 +1,9 @@
 #! /bin/sh
+
+# stop on error
 set -e
 
-# nécessite une deuxième console obtenue avec
+# nécessite une deuxième console:
 #   docker exec -ti dgse bash
 
 prog=./prog.bin
