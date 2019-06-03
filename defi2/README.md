@@ -60,14 +60,14 @@ Il faut que le _gadget_ respecte certaines conditions dûes à `scanf()`: son ad
 
 ### La stack
 
-Voici l'étape de la pile lors de l'appel à la fonction `scanf()` dans la fonction `saisie()`.
+Voici l'état de la pile dans la fonction `saisie()`.
 
 _Attention, compte tenu de l'ASLR, les adresses varient à chaque lancement._
 
 ```
                          rsp
                     --------------
-                    0x7fff64509e88  adresse retour après call main(), utilisé par ret
+                    0x7fff64509e88  adresse retour après call main(), utilisée par ret
                     0x7fff64509e80  sauvegarde rbp
 pile de main() ---->
 (0x410 octets)      0x7fff64509e78  char *login                         0x0
@@ -80,15 +80,16 @@ pile de main() ---->
 pile de saisie() -->
 (0x40 octets)       0x7fff64509a30  char password[48]                   "password"
                     0x7fff64509a28  sauvegarde de (char *buffer)        0x7fff64509a70
+                    0x7fff64509a20  inutilisé
 ```
 
 Ainsi, il y a :
 * `0x7fff64509a70 - 0x7fff64509a30` = 64 octets entre `password` et `login`
-* `0x7fff64509a68 - 0x7fff64509a30` = 56 octets entre `password` et `rip`, l'adresse de retour à la sortie de `saisie()`
+* `0x7fff64509a68 - 0x7fff64509a30` = 56 octets entre `password` et l'adresse de retour à la sortie de `saisie()`
 
 ### Pas-à-pas
 
-Le buffer overflow va écrire dans ce qu'il y a au-dessus dans la pile, à savoir le gros buffer `buffer` de la fonction `main()`.
+Le buffer overflow va écrire dans ce qu'il y a au-dessus dans la pile, à savoir le buffer de 1032 octets `buffer` de la fonction `main()`.
 
 Ainsi, les octets 64 et suivants du password vont se retrouver dans le login.
 
@@ -98,9 +99,9 @@ Le `leave` va sauter les octets 48 à 55 octets du password (la sauvegarde de `r
 
 Le `ret` va exécuter l'instruction à l'adresse donnée par les octets 56 à 63 du password (l'adresse de retour après `call saisie`), i.e. notre _gadget_ `jmp rax`.
 
-A l'adresse pointée par `rax` (le buffer du login), on a écrit `jmp +6` grâce le buffer overflow.
+A l'adresse pointée par `rax` (le buffer du login), on a écrit `jmp +6` grâce au buffer overflow.
 
-On saute donc au 11ème (5 de opcode + 6) octet du login, qui contient le _shellcode_. Pourquoi 11? parce que le login est tronqué à 10 caractères par le code.
+On saute donc au 11ème (5 de opcode + 6) octet du login, qui contient le _shellcode_. Pourquoi 11? parce que le login est tronqué à 10 caractères par le code. Le fait de mettre le _shellcode_ dans le login évite les difficultés du au troncage éventuel effectué _après_ le `scanf()` et `fgets()` est moins sensible à certains caractères (les espaces) que `scanf()`.
 
 Le _shellcode_ va charger l'adresse dans la table de relocation de `puts` (obtenue avec `objdump -R prog.bin`).
 
