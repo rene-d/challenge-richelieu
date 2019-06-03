@@ -67,8 +67,7 @@ _Attention, compte tenu de l'ASLR, les adresses varient à chaque lancement._
 ```
                          rsp
                     --------------
-                    0x7fff64509e88  sauvegarde rip
-                                    adresse de retour après call main()
+                    0x7fff64509e88  adresse retour après call main(), utilisé par ret
                     0x7fff64509e80  sauvegarde rbp
 pile de main() ---->
 (0x410 octets)      0x7fff64509e78  char *login                         0x0
@@ -76,8 +75,7 @@ pile de main() ---->
 
 <<< appel de la fonction saisie() à 0x40086d >>>
 
-                    0x7fff64509a68  sauvegarde de rip                   0x400970
-                                    adresse de retour après call saisie()
+                    0x7fff64509a68  adresse retour après call saisie()  0x400970
                     0x7fff64509a60  sauvegarde de rbp                   0x7fff64509e80
 pile de saisie() -->
 (0x40 octets)       0x7fff64509a30  char password[48]                   "password"
@@ -96,9 +94,9 @@ Ainsi, les octets 64 et suivants du password vont se retrouver dans le login.
 
 A la sortie de la fonction de saisie `saisie()`, `rax` est chargé avec le pointeur du buffer du login (cf. `return buffer;`)
 
-Le `leave` va sauter les octets 48 à 55 octets du password.
+Le `leave` va sauter les octets 48 à 55 octets du password (la sauvegarde de `rbp`).
 
-Le `ret` va exécuter l'instruction à l'adresse donnée par les octets 56 à 63 du password, i.e. notre _gadget_ `jmp rax`.
+Le `ret` va exécuter l'instruction à l'adresse donnée par les octets 56 à 63 du password (l'adresse de retour après `call saisie`), i.e. notre _gadget_ `jmp rax`.
 
 A l'adresse pointée par `rax` (le buffer du login), on a écrit `jmp +6` grâce le buffer overflow.
 
