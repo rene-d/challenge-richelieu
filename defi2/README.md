@@ -58,9 +58,37 @@ root@dgse:/dgse/defi2# ropper -f prog.bin
 
 Il faut que le _gadget_ respecte certaines conditions dûes à `scanf()`: son adresse ne doit pas avoir `0x20` ou `0x0A` (sinon `scanf()` s'arrête).
 
-### Pas-à-pas
+### La stack
 
-___TODO : dessiner de la stack___
+Voici l'étape de la pile lors de l'appel à la fonction `scanf()` dans la fonction `saisie()`.
+
+_Attention, compte tenu de l'ASLR, les adresses varient à chaque lancement._
+
+```
+                         rsp
+                    --------------
+                    0x7fff64509e88  sauvegarde rip
+                                    adresse de retour après call main()
+                    0x7fff64509e80  sauvegarde rbp
+pile de main() ---->
+(0x410 octets)      0x7fff64509e78  char *login                         0x0
+                    0x7fff64509a70  char buffer[1032]                   "login"
+
+<<< appel de la fonction saisie() à 0x40086d >>>
+
+                    0x7fff64509a68  sauvegarde de rip                   0x400970
+                                    adresse de retour après call saisie()
+                    0x7fff64509a60  sauvegarde de rbp                   0x7fff64509e80
+pile de saisie() -->
+(0x40 octets)       0x7fff64509a30  char password[48]                   "password"
+                    0x7fff64509a28  sauvegarde de (char *buffer)        0x7fff64509a70
+```
+
+Ainsi, il y a :
+* `0x7fff64509a70 - 0x7fff64509a30` = 64 octets entre `password` et `login`
+* `0x7fff64509a68 - 0x7fff64509a30` = 56 octets entre `password` et `rip`, l'adresse de retour à la sortie de `saisie()`
+
+### Pas-à-pas
 
 Le buffer overflow va écrire dans ce qu'il y a au-dessus dans la pile, à savoir le gros buffer `buffer` de la fonction `main()`.
 
