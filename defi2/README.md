@@ -64,23 +64,25 @@ Voici l'état de la pile dans la fonction `saisie()`.
 
 _Attention, compte tenu de l'ASLR, les adresses varient à chaque lancement._
 
+_Nota: Par rapport au code produit par Ghidra, les variables `ok` et `len` de la fonction `saisie()` n'ont pas de stockage sur la pile : le compilateur a optimisé. Il a en revanche ajouté une variable non mentionnée dans le code pour mémoriser l'argument de la fonction._
+
 ```
-                         rsp
-                    --------------
-                    0x7fff64509e88  adresse retour après call main(), utilisée par ret
-                    0x7fff64509e80  sauvegarde rbp
-pile de main() ---->
-(0x410 octets)      0x7fff64509e78  char *login                         0x0
-                    0x7fff64509a70  char buffer[1032]                   "login"
+                           rsp        description                         accès asm       valeur
+                      --------------  ----------------------------------  --------------  ---------------
+                      0x7fff64509e88  adresse retour après call main()                    (__libc_start_main)
+                      0x7fff64509e80  sauvegarde rbp
+pile main (rbp) --+->
+(0x410 octets)    |   0x7fff64509e78  char *login                         [rbp-0x8]
+                  \-> 0x7fff64509a70  char buffer[1032]                   [rbp-0x410]     "login"
 
-<<< appel de la fonction saisie() à 0x40086d >>>
+                <<< appel de la fonction saisie(): 0x40096b  call   0x40086d >>>
 
-                    0x7fff64509a68  adresse retour après call saisie()  0x400970
-                    0x7fff64509a60  sauvegarde de rbp                   0x7fff64509e80
-pile de saisie() -->
-(0x40 octets)       0x7fff64509a30  char password[48]                   "password"
-                    0x7fff64509a28  sauvegarde de (char *buffer)        0x7fff64509a70
-                    0x7fff64509a20  inutilisé
+                      0x7fff64509a68  adresse retour après call saisie()                  0x400970
+                      0x7fff64509a60  sauvegarde de rbp                                   0x7fff64509e80
+pile saisie (rbp) +->
+(0x40 octets)     |   0x7fff64509a30  char password[48]                   [rbp-0x30]      "password"
+                  |   0x7fff64509a28  sauvegarde de (char *buffer)        [rbp-0x38]      0x7fff64509a70
+                  \-> 0x7fff64509a20  inutilisé
 ```
 
 Ainsi, il y a :
