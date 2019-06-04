@@ -5,8 +5,11 @@ core
 .gdb_history
 peda-session-*.txt
 
-/defi1/sl
-/defi2/response
+challenge2/crack
+defi1/sl
+defi2/response
+defi3/trace
+defi3/out.html
 
 richelieu.gpr
 richelieu.rep/
@@ -14,3 +17,5 @@ richelieu.rep/
 *.lock~
 
 .vscode/ipch/
+
+
