@@ -89,6 +89,21 @@ Ainsi, il y a :
 * `0x7fff64509a70 - 0x7fff64509a30` = 64 octets entre `password` et `login`
 * `0x7fff64509a68 - 0x7fff64509a30` = 56 octets entre `password` et l'adresse de retour à la sortie de `saisie()`
 
+### L'injection de l'attaque
+
+Dans login, on place:
+
+* 10 octets d'un login quelconque
+* 1 octet qui va être écrasé par `\0` lors du troncage à 10 caractères
+* le _shellcode_, qui doit aussi tenir compte de la suppression du dernier caractères non nul (d'où le `movq rax,1`), opération qui a pour but de supprimer le `\n` final
+
+Dans password, on place:
+
+* 48 octets qui vont être lus et stockés dans la variables password, et qui doivent représenter un password valide (majuscules + miniscules + chiffres + autres)
+* 8 octets qui vont prendre la place de `rbp` et qu'on n'utilisera pas
+* une adresse sur 8 octets pour continuer l'exécution après le `ret` de `saisie()`: c'est l'adresse du _gadget_ `jmp rax`
+* à ce moment on est au début du buffer de login: un `jmp` pour sauter au _shellcode_ qui est au 11ème caractère du login
+
 ### Pas-à-pas
 
 Le buffer overflow va écrire dans ce qu'il y a au-dessus dans la pile, à savoir le buffer de 1032 octets `buffer` de la fonction `main()`.
@@ -103,7 +118,11 @@ Le `ret` va exécuter l'instruction à l'adresse donnée par les octets 56 à 63
 
 A l'adresse pointée par `rax` (le buffer du login), on a écrit `jmp +6` grâce au buffer overflow.
 
-On saute donc au 11ème (5 de opcode + 6) octet du login, qui contient le _shellcode_. Pourquoi 11? parce que le login est tronqué à 10 caractères par le code. Le fait de mettre le _shellcode_ dans le login évite les difficultés du au troncage éventuel effectué _après_ le `scanf()` et `fgets()` est moins sensible à certains caractères (les espaces) que `scanf()`.
+On saute donc au 11ème (5 de opcode + 6) octet du login, qui contient le _shellcode_.
+
+> Pourquoi 11? parce que le login est tronqué à 10 caractères par le code.
+
+> Le choix de mettre le _shellcode_ dans le login évite les difficultés dûes au troncage éventuel effectué _après_ le `scanf()` et `fgets()` est moins sensible à certains caractères (les espaces) que `scanf()`. Par exemple, `cat drapeau.txt` contient un espace, `scanf()` s'arrêterait après `cat`.
 
 Le _shellcode_ va charger l'adresse dans la table de relocation de `puts` (obtenue avec `objdump -R prog.bin`).
 
@@ -111,7 +130,7 @@ Puis soustraire `0x29b10` qui est la différence entre `system()` et `puts()` (d
 
 On met dans `rdi` l'adresse qui suit le `jmp rax`, à savoir `rip+2`.
 
-Et après ce `jmp rax`, on place la chaîne de caractère qu'on veut passer à `system()`.
+Et après ce `call rax`, on place la chaîne de caractères qu'on veut passer à `system()`.
 
 Et le tour est joué :)
 
