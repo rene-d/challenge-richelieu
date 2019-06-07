@@ -1,0 +1,21 @@
+
+Partie Wargame du CTF Richelieu
+
+Outils disponibles:
+*******************
+
+  * gdb (avec peda)
+  * python 2.7
+  * pwnlib
+  * checksec
+  * vim
+  * emacs
+  * nano
+  * ltrace
+  * strace
+  * ...
+
+ATTENTION : les connexions sont coupées et les fichiers sont détruits
+automatiquement au bout de 1 heure.
+Pensez à sauvegarder vos fichiers sur un autre poste pour ne pas les perdre.
+

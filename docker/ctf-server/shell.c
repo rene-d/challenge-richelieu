@@ -35,29 +35,7 @@ int main()
     }
     snprintf(container, sizeof container, "dgse:%s", user);
 
-    puts("\n\
-Partie Wargame du CTF Richelieu\n\
-\n\
-Outils disponibles:\n\
-*******************\n\
-\n\
-  * gdb (avec peda)\n\
-  * python 2.7\n\
-  * pwnlib\n\
-  * checksec\n\
-  * vim\n\
-  * emacs\n\
-  * nano\n\
-  * ltrace\n\
-  * strace\n\
-  * ...\n\
-\n\
-ATTENTION : les connexions sont coupées et les fichiers sont détruits\n\
-automatiquement au bout de 1 heure.\n\
-Pensez à sauvegarder vos fichiers sur un autre poste pour ne pas les perdre.\n\
-");
-
-	int err = execv(args[0], args);
+    int err = execv(args[0], args);
     if (err == -1)
     {
         fprintf(stderr, "Cannot start environement\n");

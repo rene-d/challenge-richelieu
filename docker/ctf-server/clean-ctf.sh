@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 
 # supprime les containers de défi vieux de plus d'une heure
 

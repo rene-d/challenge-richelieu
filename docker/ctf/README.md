@@ -2,19 +2,21 @@
 
 https://www.challengecybersec.fr
 
-## Plateforme d'exécution des Capture The Flag
+## Environnement d'exécution des Capture The Flag
 
-Les connexions SSH sont containerisées avec des images très proches de celles créées par le script `build.sh`.
+Les connexions SSH sont containerisées avec des [images](Dockerfile) très proches de celles créées par le script `build.sh`.
 
-* Debian Stretch slim
+* [Debian](https://hub.docker.com/_/debian/) Stretch slim
 * installation des mêmes packages, sans supplément
-* ajout de pwntools et peda
+* ajout de [pwntools](https://github.com/Gallopsled/pwntools) et [peda](https://github.com/longld/peda)
 * deux utilisateurs: defiX et defiX-drapeau
-* les deux fichiers: prog.bin et drapeau.txt
+* les deux fichiers: `prog.bin` et `drapeau.txt`
 
 ## La connexion SSH
 
-Pour que la connexion SSH à l'utilisateur defiX atterrisse dans un nouveau container à chaque fois, il est nécessaire de remplacer son login shell par le programme `shell.c` compilé.
+Pour que la connexion SSH à l'utilisateur defiX « atterrisse » à chaque fois dans un nouveau container, il est nécessaire de remplacer son login shell par le programme [shell.c](shell.c) compilé.
+
+Les mots de passe du défi sont ceux de l'utilisateur defiX du host, pas ceux des users des containers de CTF.
 
 ---
 *rene-d juin 2019*
