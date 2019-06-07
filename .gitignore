@@ -11,6 +11,11 @@ defi2/response
 defi3/trace
 defi3/out.html
 
+docker/ctf-server/ctfsh
+docker/ctf/defi1/
+docker/ctf/defi2/
+docker/ctf/defi3/
+
 richelieu.gpr
 richelieu.rep/
 *.lock
