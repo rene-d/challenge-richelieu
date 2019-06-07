@@ -1,4 +1,7 @@
-FROM debian:stretch-slim
+# Dockerfile pour les containers AttrapeLeDrapeau
+
+#
+FROM debian:stretch-slim AS base
 
 RUN apt-get update \
 &&  apt-get install -y --no-install-recommends gdb strace ltrace nano vim emacs figlet sl bsdmainutils gcc make unzip zip python-dev less file \
@@ -22,16 +25,21 @@ RUN apt-get purge -y curl \
 
 COPY motd /etc
 
-RUN useradd --create-home --password XXX --shell /bin/bash defi1 \
- && useradd --create-home --password 'DGSE{ce mot de passe doit rester inaccessible}' --shell /bin/bash defi1-drapeau
+#
+FROM base
 
-WORKDIR /home/defi1
-COPY defi1 .
-RUN chown defi1-drapeau.defi1-drapeau prog.bin drapeau.txt \
+ARG CTF_USER=defi1
+
+RUN useradd --create-home --password 'DGSE{mot de passe non utilisé/à garder secret}' --shell /bin/bash ${CTF_USER} \
+ && useradd --create-home --password 'DGSE{mot de passe non utilisé/à garder secret}' --shell /bin/bash ${CTF_USER}-drapeau
+
+WORKDIR /home/${CTF_USER}
+COPY ${CTF_USER} .
+RUN chown ${CTF_USER}-drapeau.${CTF_USER}-drapeau prog.bin drapeau.txt \
 &&  chmod 4555 prog.bin \
 &&  chmod 400 drapeau.txt
 
-USER defi1
+USER ${CTF_USER}
 
 RUN echo "source /opt/peda-master/peda.py" >> .gdbinit \
 &&  echo "syntax on" >> .vimrc

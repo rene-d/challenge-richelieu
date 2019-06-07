@@ -1,5 +1,7 @@
 #! /bin/bash
 
+# supprime les containers de défi vieux de plus d'une heure
+
 MAX_AGE=3600
 
 if [ $(uname) = "Darwin" ]; then
@@ -7,17 +9,14 @@ if [ $(uname) = "Darwin" ]; then
 else
     one_hour=$(date -d "@$(($(date --utc +%s) - ${MAX_AGE}))" +"%Y-%m-%dT%H:%M:%SZ")
 fi
-#one_hour="2019-06-06T21:18:52Z"
 
-echo "one_hour  $one_hour"
-
-docker ps --filter "label=defi" --format '{{.ID}}' | xargs -n1 docker container inspect --format='{{.ID}} {{.State.StartedAt}}' | while read id started_at
+docker ps --filter "label=defi" --format '{{.ID}}' | xargs -n1 docker container inspect --format='{{.ID}} {{.Created}}' | while read id started_at
 do
     if [[ ${one_hour} > ${started_at} ]]
     then
-        echo "kill      ${started_at} too old (>${MAX_AGE} s)"
+        echo "Remove  ${started_at} too old (>${MAX_AGE} s)"
         docker container rm --force ${id}
     else
-        echo "startedat ${started_at} ok"
+        echo "Created ${started_at} ok"
     fi
 done
