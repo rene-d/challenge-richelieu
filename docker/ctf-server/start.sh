@@ -4,7 +4,10 @@
 docker run -ti --rm -v $PWD:/data -w /data gcc:6 make
 
 # construit l'image du server ssh
-docker build --tag dgse:ctf-server .
+docker build \
+  --build-arg 'USER=defi1' \
+  --build-arg 'PASSWORD=defi' \
+  --tag dgse:ctf-server .
 
 ./clean-ctf.sh 0
 docker rm --force ctf-server

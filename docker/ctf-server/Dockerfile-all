@@ -17,11 +17,7 @@ COPY clean-ctf.sh /bin
 RUN crontab -l | { cat; echo "*/1 * * * * /bin/clean-ctf.sh"; } | crontab -
 
 # crée l'utilisateur
-ARG USER="defi1"
-ARG PASSWORD="defi1"
-
-ENV UID=1000 GID=1000
-
+ENV USER="defi1" PASSWORD="defi" UID=1000 GID=1000
 RUN addgroup --gid "$GID" "$USER" \
 &&  adduser \
     --disabled-password \
@@ -34,11 +30,7 @@ RUN addgroup --gid "$GID" "$USER" \
     "$USER" \
 &&  echo "$USER:$PASSWORD" | chpasswd
 
-
-ARG USER="defi2"
-ARG PASSWORD="defi2"
-ENV UID=1001 GID=1001
-
+ENV USER="defi2" PASSWORD="defi" UID=1001 GID=1001
 RUN addgroup --gid "$GID" "$USER" \
 &&  adduser \
     --disabled-password \
@@ -51,11 +43,7 @@ RUN addgroup --gid "$GID" "$USER" \
     "$USER" \
 &&  echo "$USER:$PASSWORD" | chpasswd
 
-
-ARG USER="defi3"
-ARG PASSWORD="defi3"
-ENV UID=1002 GID=1002
-
+ENV USER="defi3" PASSWORD="defi" UID=1002 GID=1002
 RUN addgroup --gid "$GID" "$USER" \
 &&  adduser \
     --disabled-password \
@@ -68,6 +56,7 @@ RUN addgroup --gid "$GID" "$USER" \
     "$USER" \
 &&  echo "$USER:$PASSWORD" | chpasswd
 
+# expose le 22 de sshd
 EXPOSE 22
 
 COPY entrypoint /entrypoint

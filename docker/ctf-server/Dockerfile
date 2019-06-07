@@ -19,7 +19,6 @@ RUN crontab -l | { cat; echo "*/1 * * * * /bin/clean-ctf.sh"; } | crontab -
 # crée l'utilisateur
 ARG USER="defi1"
 ARG PASSWORD="defi1"
-
 ENV UID=1000 GID=1000
 
 RUN addgroup --gid "$GID" "$USER" \

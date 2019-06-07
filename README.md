@@ -91,7 +91,7 @@ Ainsi que:
 * [Visual Studio Code](https://code.visualstudio.com)
 * [git](https://git-scm.com)
 
-## Le container Docker
+## Le container Docker utilitaire
 
 L'image Docker [dgse:stretch](docker/stretch/Dockerfiler) est une machine très proche de celles mises à disposition pour les défis. Il permet de tout lancer, quelque soit la machine hôte, les outils ci-dessus ainsi que les binaires `prog.bin` du challenge.
 
@@ -115,6 +115,16 @@ docker exec -ti dgse bash
 A adapter en fonction de l'emplacement du dépôt (`~/dgse` dans la commande ci-dessus).
 
 Le script shell [dgse.sh](dgse.sh) est un wrapper à ces commandes.
+
+## Imiter la plate-forme de CTF
+
+### Le serveur SSH / hébergement des containers de CTF
+
+[dgse:ctf-server](docker/ctf-server/README.md)
+
+### Les containers de CTF
+
+Les trois images `dgse:defi1` `dgse:defi2` `dgse:defi3` sont quasi similaires (même distro, mêmes packages, mêmes outils) que ce qui est mis à disposition pour le challenge. Voir [ici](docker/ctf/README.md).
 
 ---
 *rene-d mai 2019*
