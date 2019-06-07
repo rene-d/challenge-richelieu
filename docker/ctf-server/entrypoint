@@ -1,0 +1,7 @@
+#! /bin/sh
+
+# lance crond
+/usr/sbin/crond
+
+# passe le contrôle à sshd
+exec /usr/sbin/sshd -D
