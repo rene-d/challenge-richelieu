@@ -120,11 +120,11 @@ Le script shell [dgse.sh](dgse.sh) est un wrapper à ces commandes.
 
 ### Le serveur SSH / hébergement des containers de CTF
 
-[dgse:ctf-server](docker/ctf-server/README.md)
+[dgse:ctf-server](docker/ctf-server/)
 
 ### Les containers de CTF
 
-Les trois images `dgse:defi1` `dgse:defi2` `dgse:defi3` sont quasi similaires (même distro, mêmes packages, mêmes outils) que ce qui est mis à disposition pour le challenge. Voir [ici](docker/ctf/README.md).
+Les trois images `dgse:defi1` `dgse:defi2` `dgse:defi3` sont quasi similaires (même distro, mêmes packages, mêmes outils) que ce qui est mis à disposition pour le challenge. Voir [ici](docker/ctf/).
 
 ---
 *rene-d mai 2019*
