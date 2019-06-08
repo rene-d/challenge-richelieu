@@ -1,16 +1,16 @@
 .DS_Store
 __pycache__/
-ghidra_9.0.4/
+/ghidra_9.0.4/
 core
 .gdb_history
 peda-session-*.txt
+/machines/
 
 challenge2/crack
 defi1/sl
 defi2/response
 defi3/trace
 defi3/out.html
-
 docker/ctf-server/ctfsh
 docker/ctf/defi1/
 docker/ctf/defi2/
@@ -21,6 +21,5 @@ richelieu.rep/
 *.lock
 *.lock~
 
-.vscode/ipch/
-
+/.vscode/ipch/
 

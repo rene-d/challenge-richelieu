@@ -30,9 +30,11 @@ FROM base
 
 ARG CTF_USER=defi1
 
-RUN useradd --create-home --password 'DGSE{mot de passe non utilisé/à garder secret}' --shell /bin/bash ${CTF_USER} \
- && useradd --create-home --password 'DGSE{mot de passe non utilisé/à garder secret}' --shell /bin/bash ${CTF_USER}-drapeau
+# crée les deux users
+RUN useradd --create-home --shell /bin/bash ${CTF_USER} \
+ && useradd --create-home --shell /bin/bash ${CTF_USER}-drapeau
 
+# installe le défi
 WORKDIR /home/${CTF_USER}
 COPY ${CTF_USER} .
 RUN chown ${CTF_USER}-drapeau.${CTF_USER}-drapeau prog.bin drapeau.txt \
