@@ -1,3 +1,4 @@
+.vscode/
 .DS_Store
 __pycache__/
 /ghidra_9.0.4/
