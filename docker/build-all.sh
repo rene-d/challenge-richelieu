@@ -15,7 +15,7 @@ m "ctf"
 ctf/build.sh
 
 m "ctf-serveur"
-ctf/build.sh all build
-ctf/build.sh defi1 defi build
-ctf/build.sh defi2 defi build
-ctf/build.sh defi3 defi build
+ctf-server/start.sh all build
+ctf-server/start.sh defi1 defi build
+ctf-server/start.sh defi2 defi build
+ctf-server/start.sh defi3 defi build

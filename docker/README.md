@@ -32,7 +32,7 @@ REPOSITORY | TAG | Description
 ---------- | --- | -----------
 [buildpack-deps](https://hub.docker.com/_/buildpack-deps/)  | stretch       | base pour dgse:stretch
 [debian](https://hub.docker.com/_/debian/)                  | stretch-slim  | base pour les machines de CTF
-[alpine](https://hub.docker.com/_/alpine/)                  | latest        | base de alpine-gcc
+[alpine](https://hub.docker.com/_/alpine/)                  | latest        | base de alpine-gcc-make
 [docker](https://hub.docker.com/_/docker/)                  | edge          | pour Docker in Docker
 
 ---
