@@ -8,11 +8,11 @@ Le challenge commence par un site web, avec la date de fin du challenge, un comp
 
 1. [Pour commencer](#Pour-commencer)
 2. [Exploitation du document PDF](#Exploitation-du-document-PDF)
-3. [Exploitation de l'image JPEG](#Exploitation-de-l'image-JPEG)
-4. [Extraction des fichiers de l'archive ZIP](#Extraction-des-fichiers-de-l'archive-ZIP)
+3. [Exploitation de l'image JPEG](#Exploitation-de-limage-JPEG)
+4. [Extraction des fichiers de l'archive ZIP](#Extraction-des-fichiers-de-larchive-ZIP)
 5. [Recherche de la clé privée RSA](#Recherche-de-la-clé-privée-RSA)
-6. [Décryptage de l'image PNG](Décryptage-de-l'image-PNG)
-7. [Analyse de l'image PNG](#Analyse-de-l'image-PNG)
+6. [Décryptage de l'image PNG](Décryptage-de-limage-PNG)
+7. [Analyse de l'image PNG](#Analyse-de-liimage-PNG)
 8. [Extraction et décompression du programme ELF](#Extraction-et-décompression-du-programme)
 
 ## Exploit
@@ -37,10 +37,12 @@ if (login === password) {
 ainsi que le nécessaire pour afficher le compte à rebours et l'animation.
 
 Il s'agit donc d'une redirection non activée: il doit donc y avoir une ressource `Richelieu.pdf` sur le serveur.
+
+La commande
 ```
 curl -O https://www.challengecybersec.fr/Richelieu.pdf
 ```
-permet de confirmer et de vraiment commencer le challenge.
+permet de confirmer la supposition et de vraiment commencer le challenge.
 
 Le PDF n'a qu'un texte visible, une introduction du challenge expliquant la référence à [Armand Jean du Plessis, cardinal de Richelieu](https://fr.wikipedia.org/wiki/Armand_Jean_du_Plessis_de_Richelieu).
 
@@ -54,11 +56,11 @@ Le PDF n'a qu'un texte visible, une introduction du challenge expliquant la réf
 
 ## Exploitation du document PDF
 
-Il y a un texte non affiché, qu'on peut extraire avec [pdftotext](https://manpages.debian.org/stretch/poppler-utils/pdftotext.1.en.html) de [Poppler](https://poppler.freedesktop.org)
+Il y a un texte non affiché, qu'on peut extraire avec [pdftotext](https://manpages.debian.org/stretch/poppler-utils/pdftotext.1.en.html) de [Poppler](https://poppler.freedesktop.org) :
 ```bash
 pdftotext Richelieu.pdf Richelieu.txt
 ```
-Le fichier obtenu contient le paragraphe ci-dessus et du [base64](https://fr.wikipedia.org/wiki/Base64).
+Le fichier obtenu contient le paragraphe ci-dessus et du [Base64](https://fr.wikipedia.org/wiki/Base64).
 
 Pour le décoder, il faut supprimer le texte, les lignes vides et les ^L :
 ```bash
@@ -83,11 +85,11 @@ Rien dans les tags de l'image. En revanche, un `strings data` laisser penser qu'
 
 Ceci est confirmé par une analyse [stéganographique](https://fr.wikipedia.org/wiki/Stéganographie) de l'image :
 ```bash
-docker run -it --rm -v $PWD:/data bannsec/stegoveritas stegoveritas /data/data.jpg | more
+docker run -it --rm -v $PWD:/work bannsec/stegoveritas stegoveritas /work/data | more
 ```
 Pour reconstituer l'archive ZIP de 6247550 octets (_one-liner_) :
 ```bash
-docker run -it --rm -v $PWD:/data bannsec/stegoveritas stegoveritas /data/data.jpg | sed '8p;d' | python3 -c "import sys; open('data.zip','wb').write(eval(sys.stdin.read()))"
+docker run -it --rm -v $PWD:/work bannsec/stegoveritas stegoveritas /work/data | sed '8p;d' | python3 -c "import sys; open('data.zip','wb').write(eval(sys.stdin.read()))"
 ```
 
 ## Extraction des fichiers de l'archive ZIP
@@ -210,7 +212,7 @@ chmod a+x prog.bin
 
 On obtient finalement un exécutable `prog.bin` de 297492 octets.
 
-Ce programme vérifie un mot de passe (celui de `suite.zip`): c'est un _crack-me_.
+Ce programme vérifie un mot de passe (celui de `suite.zip`): c'est un _crack-me_.
 
 
 [Suite...](../challenge2/README.md)

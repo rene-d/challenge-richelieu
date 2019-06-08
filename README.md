@@ -126,7 +126,7 @@ La plate-forme de CTF (ssh://defiX@defiX.challengecybersec.fr:2222) est imitée 
 ## Autres ressources
 
 * [les images Docker](docker/README.md)
-* [fournitures du challengge](sources.md)
+* [fournitures du challenge](sources.md)
 
 ---
 *rene-d mai 2019*

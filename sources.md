@@ -20,11 +20,11 @@ Reconstitution des fichiers source du challenge
 
 Description | Fichier
 ----------- | -------
-texte du PDF | [intro](challenge1/README.md#Texte-d'introduction)
+texte du PDF | [intro](challenge1/README.md#Texte-dintroduction)
 1er dessin de Richelieu (taille origine: 2110 × 3508) | [Richelieu.jpg](challenge1/Richelieu-resized.jpg) 💬
 clé privée RSA | [priv.key](challenge1/results/priv.key)
 mot de passe du PNG | [motDePasseGPG.txt](challenge1/results/motDePasseGPG.txt)
-2ème dessin de Richelieu (taille origine: 1562 × 2424) | [Richelieu.png](challenge1/lsb_RGB-resized.png) ⚠️ 
+2ème dessin de Richelieu (taille origine: 1562 × 2424) | [Richelieu.png](challenge1/lsb_RGB-resized.png) ⚠️
 crack-me pour le mot de passe de suite.zip | [prog.c](challenge2/prog.c)
 suite du challenge | [suite.txt](challenge1/results/suite.txt)
 CTF défi1 | [defi1.c](defi1/defi1.c)

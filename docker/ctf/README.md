@@ -14,9 +14,9 @@ Les connexions SSH sont containerisées avec des [images](Dockerfile) très proc
 
 ## La connexion SSH
 
-Pour que la connexion SSH à l'utilisateur defiX « atterrisse » à chaque fois dans un nouveau container, il est nécessaire de remplacer son login shell par le programme [shell.c](shell.c) compilé.
+Pour que la connexion SSH à l'utilisateur defiX « atterrisse » à chaque fois dans un nouveau container, il est nécessaire d'appeler `docker run` à la place de `/bin/bash`. Voir [ctf-server](../ctf-server/README.md).
 
-Les mots de passe du défi sont ceux de l'utilisateur defiX du host, pas ceux des users des containers de CTF.
+Les mots de passe du défi sont ceux de l'utilisateur defiX du host, pas ceux des users des containers de CTF (ils sont d'ailleurs désactivés).
 
 ---
 *rene-d juin 2019*
