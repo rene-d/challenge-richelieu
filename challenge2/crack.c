@@ -1,3 +1,6 @@
+// calcule le mot de passe
+//
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,12 +32,16 @@ int main()
     }
     mot_de_passe[i] = 0;
 
+    printf("%s\n", mot_de_passe);
+
+    /*
     printf("trouvé: %s\n", mot_de_passe);
 
     printf("vérification:\n");
     char cmd[256];
     snprintf(cmd, sizeof(cmd), "./prog.bin '%s'", mot_de_passe);
     system(cmd);
+    */
 
     return 0;
 }

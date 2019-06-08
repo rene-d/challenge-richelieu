@@ -1,3 +1,6 @@
+// reverse-engineering de prog.bin
+//
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

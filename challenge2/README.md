@@ -81,9 +81,13 @@ Le code pour calculer le mot de passe qui va fonctionner est simple:
 
 Le programme [prog.c](prog.c) est une version reconstituée et compilable de `prog.bin`.
 
-Le programme [crack.c](crack.c) reconstitue le mot de passe, l'affiche et le vérifie avec `prog.bin`.
+Le programme [crack.c](crack.c) reconstitue le mot de passe.
 
 Le mot de passe est donc: `DGSE{g456@g5112bgyfMnbVXw.llM}`
+
+Le programme [gen-table.c](gen-table.c) est une implémentation du programme utilisé pour préparer le tableau `DAT_004898c0`.
+
+Le script [exploit.sh](exploit.sh) permet d'utiliser les étapes précédentes dans un container Docker.
 
 ## Suite du challenge
 
