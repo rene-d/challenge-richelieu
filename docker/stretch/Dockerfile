@@ -49,7 +49,7 @@ RUN apt-get install -y ruby \
 RUN echo "alias ls='ls --color=auto'\nalias ll='ls --color=auto -l'\nalias l='ls --color=auto -lA'" >> /root/.bashrc \
 &&  echo "syntax on" >> /root/.vimrc
 
+VOLUME /dgse
+
 COPY docker-entrypoint.sh /entrypoint
 ENTRYPOINT ["/entrypoint"]
-
-CMD ["bash"]

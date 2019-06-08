@@ -1,5 +1,8 @@
 #! /bin/bash
 
+set -e
+cd $(dirname $0)
+
 u()
 {
     file=$1
@@ -16,7 +19,7 @@ b()
     u prog.bin
     u drapeau.txt
 
-    docker build --tag dgse:${defi} --label defi --build-arg CTF_USER=${defi} .
+    docker build --tag dgse:${defi} --label defi --label challenge_richelieu --build-arg CTF_USER=${defi} .
 }
 
 echo

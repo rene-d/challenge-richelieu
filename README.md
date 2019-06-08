@@ -118,13 +118,15 @@ Le script shell [dgse.sh](dgse.sh) est un wrapper à ces commandes.
 
 ## Imiter la plate-forme de CTF
 
-### Le serveur SSH / hébergement des containers de CTF
+La plate-forme de CTF (ssh://defiX@defiX.challengecybersec.fr:2222) est imitée à l'aide de deux containers:
 
-[dgse:ctf-server](docker/ctf-server/)
+* un [container](docker/ctf-server/) pour héberger le serveur SSH et le login/password
+* un [container](docker/ctf/) pour héberger le shell utilisateur pour réaliser le CTF
 
-### Les containers de CTF
+## Autres ressources
 
-Les trois images `dgse:defi1` `dgse:defi2` `dgse:defi3` sont quasi similaires (même distro, mêmes packages, mêmes outils) que ce qui est mis à disposition pour le challenge. Voir [ici](docker/ctf/).
+* [les images Docker](docker/README.md)
+* [fournitures du challengge](sources.md)
 
 ---
 *rene-d mai 2019*

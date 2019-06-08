@@ -2,7 +2,6 @@
 
 https://www.challengecybersec.fr
 
-
 ## Analyse de binaire
 
 Le programme ELF a été compilé en statique (aka. `gcc -static -o prog.bin prog.c`):
