@@ -10,9 +10,9 @@ RUN rm -rf /etc/ssh/ssh_host_* \
 COPY motd /etc
 COPY ctfsh /bin
 RUN echo /bin/ctfsh >> /etc/shells \
-&&  chmod 4755 /bin/ctfsh
+&&  addgroup -g 500 docker
 
-# la crontab
+# la crontab (nettoyage des connexions trop longues)
 COPY clean-ctf.sh /bin
 RUN crontab -l | { cat; echo "*/1 * * * * /bin/clean-ctf.sh"; } | crontab -
 
@@ -20,7 +20,6 @@ RUN crontab -l | { cat; echo "*/1 * * * * /bin/clean-ctf.sh"; } | crontab -
 ARG USER="defi1"
 ARG PASSWORD="defi1"
 ENV UID=1000 GID=1000
-
 RUN addgroup --gid "$GID" "$USER" \
 &&  adduser \
     --disabled-password \
@@ -31,8 +30,10 @@ RUN addgroup --gid "$GID" "$USER" \
     --uid "$UID" \
     --shell "/bin/ctfsh" \
     "$USER" \
+&&  addgroup $USER docker \
 &&  echo "$USER:$PASSWORD" | chpasswd
 
+# expose le 22 de sshd
 EXPOSE 22
 
 COPY entrypoint /entrypoint

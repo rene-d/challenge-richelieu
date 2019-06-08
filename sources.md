@@ -13,8 +13,9 @@ Fichier | Taille | MD5
 [defi1/drapeau.txt](defi1/drapeau.txt) 🇫🇷 |   133 | `fdab957440cb01668dfff5864fd87f19`
 [defi2/drapeau.txt](defi2/drapeau.txt) 🇫🇷 |   133 | `41f38dc256edbf3b8d82b2875c7d5c22`
 [defi3/drapeau.txt](defi3/drapeau.txt) 🇫🇷 |   564 | `bdd43aa104db67e4a1c99c59e353c5a4`
+le site [web](challenge1/web/) | |
 
-## Fichiers source
+## Elaboration du challenge
 
 Reconstitution des fichiers source du challenge
 
@@ -25,11 +26,14 @@ texte du PDF | [intro](challenge1/README.md#Texte-dintroduction)
 clé privée RSA | [priv.key](challenge1/results/priv.key)
 mot de passe du PNG | [motDePasseGPG.txt](challenge1/results/motDePasseGPG.txt)
 2ème dessin de Richelieu (taille origine: 1562 × 2424) | [Richelieu.png](challenge1/lsb_RGB-resized.png) ⚠️
-crack-me pour le mot de passe de suite.zip | [prog.c](challenge2/prog.c)
+_crack-me_ pour le mot de passe de suite.zip | [prog.c](challenge2/prog.c)
+générateur pour le _crack-me_ | [gen-table.c](challenge2/gen-table.c)
 suite du challenge | [suite.txt](challenge1/results/suite.txt)
 CTF défi1 | [defi1.c](defi1/defi1.c)
 CTF défi2 | [defi2.c](defi2/defi2.c)
 CTF défi3 | [defi3.c](defi3/defi3.c)
+environnement AttrapeLeDrapeau | [Dockerfile](docker/ctf/Dockerfile)
+serveur AttrapeLeDrapeau | [Dockerfile](docker/ctf-server/Dockerfile), [shell.c](docker/ctf-server/shell.c)
 
 💬 _l'image d'origine est constituée des 445628 premiers octets de [data](challenge1/results/data), `dd if=data of=Richelieu.jpg bs=445628 count=1` pour la recréer._
 
