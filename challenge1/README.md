@@ -11,8 +11,8 @@ Le challenge commence par un site web, avec la date de fin du challenge, un comp
 3. [Exploitation de l'image JPEG](#Exploitation-de-limage-JPEG)
 4. [Extraction des fichiers de l'archive ZIP](#Extraction-des-fichiers-de-larchive-ZIP)
 5. [Recherche de la clé privée RSA](#Recherche-de-la-clé-privée-RSA)
-6. [Décryptage de l'image PNG](Décryptage-de-limage-PNG)
-7. [Analyse de l'image PNG](#Analyse-de-liimage-PNG)
+6. [Décryptage de l'image PNG](#Décryptage-de-limage-PNG)
+7. [Analyse de l'image PNG](#Analyse-de-limage-PNG)
 8. [Extraction et décompression du programme ELF](#Extraction-et-décompression-du-programme)
 
 ## Exploit
