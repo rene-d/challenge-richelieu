@@ -11,7 +11,7 @@ m "alpine gcc"
 gcc-make/build.sh --quiet
 
 m "outils"
-stretch/build.sh --quiet
+hacking/build.sh --quiet
 
 m "ctf"
 ctf/build.sh --quiet

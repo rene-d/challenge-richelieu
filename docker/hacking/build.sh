@@ -7,7 +7,7 @@ set -e
 cd $(dirname $0)
 if [[ $1 == --quiet ]]; then quiet=--quiet; shift; else quiet=; fi
 
-docker build ${quiet} --label challenge_richelieu -t dgse:stretch -t dgse .
+docker build ${quiet} --label challenge_richelieu -t dgse:hacking -t dgse:hacking-stretch -t dgse .
 
 docker image prune --force
 docker images | grep "^.none" | awk '{print $3}' | xargs docker rmi
