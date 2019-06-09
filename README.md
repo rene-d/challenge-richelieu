@@ -64,6 +64,8 @@ Nota: cette découpe est personnelle et subjective.
 * [étape 11](defi2/README.md)
 * [étape 12](defi3/README.md)
 
+Le script [test-all.sh](test-all.sh) enchaine toutes les étapes du challenge.
+
 ## Les outils utilisés
 
 * [Linux Debian Stretch](https://www.debian.org/releases/stretch/)

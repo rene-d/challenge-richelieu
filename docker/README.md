@@ -1,4 +1,4 @@
-# Challenge Richelieu de la DGSE - suite
+# Challenge Richelieu de la DGSE
 
 https://www.challengecybersec.fr
 
@@ -9,16 +9,12 @@ https://www.challengecybersec.fr
 REPOSITORY | TAG | Description
 ---------- | --- | -----------
 dgse            | [stretch, latest](stretch/Dockerfile)         | Image avec tous les outils
-dgse            | [defi1](ctf/Dockerfile)                       | Environnement CTF du defi1
-dgse            | [defi2](ctf/Dockerfile)                       | Environnement CTF du defi2
-dgse            | [defi3](ctf/Dockerfile)                       | Environnement CTF du defi3
-dgse            | [ctf-server-defi1](ctf-server/Dockerfile)     | Serveur SSH pour environnement de CTF de defi1
-dgse            | [ctf-server-defi2](ctf-server/Dockerfile)     | Serveur SSH pour environnement de CTF de defi2
-dgse            | [ctf-server-defi3](ctf-server/Dockerfile)     | Serveur SSH pour environnement de CTF de defi3
+dgse            | [defi1](ctf/Dockerfile) [defi2](ctf/Dockerfile) [defi3](ctf/Dockerfile)                      | Environnement CTF de defi1 defi2 defi3
+dgse            | [ctf-server-defi1](ctf-server/Dockerfile) [ctf-server-defi2](ctf-server/Dockerfile) [ctf-server-defi3](ctf-server/Dockerfile)     | Serveur SSH pour un environnement de CTF
 dgse            | [ctf-server-all](ctf-server/Dockerfile-all)   | Serveur SSH pour les trois CTF
 alpine-gcc-make | [latest](gcc-make/Dockerfile)                 | Cross-compilation pour Linux
 
-Le script [build-all.sh](build-all.sh) appelle toutes les commandes `docker build` nécessaires pour créer les images ci-dessus.
+Le script [build-all.sh](build-all.sh) appelle toutes les commandes [docker build](https://docs.docker.com/engine/reference/commandline/build/) nécessaires pour créer les images ci-dessus.
 
 ☣️ La commande suivante permet de supprimer toutes les images créées pour le challenge :
 
