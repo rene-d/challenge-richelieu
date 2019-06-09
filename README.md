@@ -64,6 +64,8 @@ Nota: cette découpe est personnelle et subjective.
 * [étape 11](defi2/README.md)
 * [étape 12](defi3/README.md)
 
+Le script [test-all.sh](test-all.sh) enchaine toutes les étapes du challenge.
+
 ## Les outils utilisés
 
 * [Linux Debian Stretch](https://www.debian.org/releases/stretch/)
@@ -72,10 +74,11 @@ Nota: cette découpe est personnelle et subjective.
 * [curl](https://curl.haxx.se)
 * [Python](https://www.python.org) 2 et 3
 * [Poppler](http://poppler.freedesktop.org)
+* [binwalk](https://github.com/ReFirmLabs/binwalk) _(non installé)_
+* [StegoVeritas](https://github.com/bannsec/stegoVeritas) _(via un container Docker)_
 * [OpenSSL](http://openssl.org)
 * [GnuPG](https://gnupg.org)
 * [zsteg](https://github.com/zed-0xff/zsteg)
-* [StegoVeritas](https://github.com/bannsec/stegoVeritas)
 * [UPX](https://upx.github.io)
 * [Ghidra](https://ghidra-sre.org)
 * [gdb](https://www.gnu.org/software/gdb/), [ltrace](https://linux.die.net/man/1/ltrace), [objdump](https://linux.die.net/man/1/objdump)
@@ -93,16 +96,16 @@ Ainsi que:
 
 ## Le container Docker utilitaire
 
-L'image Docker [dgse:stretch](docker/stretch/Dockerfiler) est une machine très proche de celles mises à disposition pour les défis. Il permet de tout lancer, quelque soit la machine hôte, les outils ci-dessus ainsi que les binaires `prog.bin` du challenge.
+L'image Docker [dgse:hacking](docker/hacking/Dockerfiler) est une machine très proche de celles mises à disposition pour les défis. Il permet de tout lancer, quelque soit la machine hôte, les outils ci-dessus ainsi que les binaires `prog.bin` du challenge.
 
 Pour créer l'image (dans le répertoire du `Dockerfile`):
 ```bash
-docker build -t dgse:stretch .
+docker build -t dgse:hacking .
 ```
 
 Pour lancer le container:
 ```bash
-docker run --name dgse --hostname dgse --rm -ti -v ~/dgse:/dgse --cap-add=SYS_PTRACE dgse:stretch
+docker run --name dgse --hostname dgse --rm -ti -v ~/dgse:/dgse --cap-add=SYS_PTRACE dgse:hacking
 ```
 
 La _capability_ `SYS_PTRACE` est nécessaire pour gdb, strace, etc.
