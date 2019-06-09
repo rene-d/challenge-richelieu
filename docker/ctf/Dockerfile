@@ -11,7 +11,7 @@ RUN apt-get update \
 # pip2 et pwntools
 RUN curl --insecure https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py \
 &&  python2 /tmp/get-pip.py \
-&&  pip2 install --upgrade pwntools \
+&&  pip2 --no-cache-dir install --upgrade pwntools \
 &&  rm /tmp/get-pip.py
 
 # extensions de gdb
