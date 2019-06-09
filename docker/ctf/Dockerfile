@@ -38,7 +38,7 @@ RUN useradd --create-home --shell /bin/bash ${CTF_USER} \
 WORKDIR /home/${CTF_USER}
 COPY ${CTF_USER} .
 RUN chown ${CTF_USER}-drapeau.${CTF_USER}-drapeau prog.bin drapeau.txt \
-&&  chmod 4555 prog.bin \
+&&  chmod 6555 prog.bin \
 &&  chmod 400 drapeau.txt
 
 USER ${CTF_USER}
