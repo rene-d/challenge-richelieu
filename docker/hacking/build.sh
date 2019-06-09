@@ -7,9 +7,19 @@ set -e
 cd $(dirname $0)
 if [[ $1 == --quiet ]]; then quiet=--quiet; shift; else quiet=; fi
 
-docker build ${quiet} --label challenge_richelieu -t dgse:hacking -t dgse:hacking-stretch -t dgse .
+distro=stretch
+if [[ $1 == stretch ]]; then shift; fi
+if [[ $1 == buster ]]; then distro=buster; shift; fi
+
+docker build ${quiet} --label challenge_richelieu \
+    --build-arg DISTRO=${distro} \
+    -t dgse:hacking -t dgse:hacking-${distro} -t dgse .
 
 docker image prune --force
 docker images | grep "^.none" | awk '{print $3}' | xargs docker rmi
 
-# docker run --rm -ti --name dgse --hostname dgse -v $HOME/dgse:/dgse --cap-add=SYS_PTRACE dgse
+if [[ $1 == run ]]
+then
+    DGSE=$(git rev-parse --show-toplevel)
+    docker run --rm -ti --name dgse --hostname dgse -v ${DGSE}:/dgse --cap-add=SYS_PTRACE dgse
+fi
