@@ -95,7 +95,7 @@ Ainsi que:
 
 L'image Docker [dgse:stretch](docker/stretch/Dockerfiler) est une machine très proche de celles mises à disposition pour les défis. Il permet de tout lancer, quelque soit la machine hôte, les outils ci-dessus ainsi que les binaires `prog.bin` du challenge.
 
-Pour créer l'image (donc le répertoire du `Dockerfile`):
+Pour créer l'image (dans le répertoire du `Dockerfile`):
 ```bash
 docker build -t dgse:stretch .
 ```

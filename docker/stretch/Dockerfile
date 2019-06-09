@@ -47,9 +47,12 @@ RUN apt-get install -y ruby \
 &&  gem install zsteg
 
 RUN echo "alias ls='ls --color=auto'\nalias ll='ls --color=auto -l'\nalias l='ls --color=auto -lA'" >> /root/.bashrc \
+&&  echo export LANG=fr_FR.UTF-8 >> /root/.bashrc \
+&&  echo export LC_CTYPE=C.UTF-8 >> /root/.bashrc \
+&&  echo '[ $(tty) != "/dev/pts/0" ] && echo -e "I am on tty \033[01;33m$(tty)\033[0m"' >> /root/.bashrc \
 &&  echo "syntax on" >> /root/.vimrc
 
 VOLUME /dgse
+WORKDIR /dgse
 
-COPY docker-entrypoint.sh /entrypoint
-ENTRYPOINT ["/entrypoint"]
+CMD ["bash"]

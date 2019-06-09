@@ -2,6 +2,7 @@
 
 set -e
 cd $(dirname $0)
+if [[ $1 == --quiet ]]; then quiet=--quiet; shift; else quiet=; fi
 
 u()
 {
@@ -19,7 +20,7 @@ b()
     u prog.bin
     u drapeau.txt
 
-    docker build --tag dgse:${defi} --label defi --label challenge_richelieu --build-arg CTF_USER=${defi} .
+    docker build ${quiet} --label challenge_richelieu --tag dgse:${defi} --label defi --build-arg CTF_USER=${defi} .
 }
 
 echo
@@ -34,4 +35,4 @@ echo -e "\033[32mVérification des containers\033[0m"
 echo
 
 docker image ls --filter 'label=defi' --filter='reference=dgse' --format '{{.ID}}' | \
-  xargs -t -n1 -I {} docker run -t --rm --hostname AttrapeLeDrapeau --network none --label defi {} ls -la
+  xargs -t -n1 -I {} docker run -t --rm --hostname AttrapeLeDrapeau --network none --label defi {} ls -l

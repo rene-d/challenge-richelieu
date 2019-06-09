@@ -49,3 +49,6 @@ mot de passe de suite.zip                             | `DGSE{g456@g5112bgyfMnbV
 mot de passe ssh de defi1@defi1.challengecybersec.fr  | `DGSE{2f77c517b06f1cd1ce864f79f41f25ca8874413c8c1204f7ec9c6728c87f270a}`
 mot de passe ssh de defi2@defi2.challengecybersec.fr  | `DGSE{H#M?W)el{0YZ-)77/C#ogrp}k4&EbP}`
 mot de passe ssh de defi3@defi3.challengecybersec.fr  | `DGSE{?uo20tPO4(o=A=dX3njr2y{emZQodR}`
+
+---
+*rene-d juin 2019*

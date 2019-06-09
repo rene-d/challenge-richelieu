@@ -2,5 +2,6 @@
 
 set -e
 cd $(dirname $0)
+if [[ $1 == --quiet ]]; then quiet=--quiet; shift; else quiet=; fi
 
-docker build --tag alpine-gcc-make --label challenge_richelieu .
+docker build ${quiet} --label challenge_richelieu --tag alpine-gcc-make .

@@ -2,6 +2,7 @@
 
 set -e
 cd $(dirname $0)
+if [[ $1 == --quiet ]]; then quiet=--quiet; shift; else quiet=; fi
 
 m()
 {
@@ -10,7 +11,7 @@ m()
 
 # compile shell.c avec gcc dockerisé
 m "compilation /bin/ctfsh"
-../gcc-make/build.sh
+../gcc-make/build.sh ${quiet}
 docker run -ti --rm -v $PWD:/work -w /work alpine-gcc-make make
 
 # construit l'image du server ssh
@@ -19,7 +20,7 @@ then
     shift
     image=dgse:ctf-server-all
     m "création image ${image}"
-    docker build --label challenge_richelieu --tag ${image} -f Dockerfile-all .
+    docker build ${quiet} --label challenge_richelieu --tag ${image} -f Dockerfile-all .
 else
     if [[ $1 =~ defi[[:digit:]] ]]
     then
@@ -33,13 +34,13 @@ else
     image=dgse:ctf-server-${user##user}
 
     m "création image ${image} pour user=${user} password=${password}"
-    docker build --label challenge_richelieu \
+    docker build ${quiet} --label challenge_richelieu \
         --build-arg "USER=${user}" \
         --build-arg "PASSWORD=${password}" \
         --tag ${image} .
 fi
 
-if [[ $1 = build ]]
+if [[ $1 = norun ]]
 then
     exit
 fi

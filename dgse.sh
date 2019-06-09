@@ -29,7 +29,7 @@ ID=$(
 
 if [[ ${ID} ]]; then
     echo "Attaching a new terminal to the container"
-    docker exec -ti ${ID} /entrypoint bash
+    docker exec -ti ${ID} bash
 else
     echo "Starting the container"
     DGSE=$(cd $(dirname $0); pwd)

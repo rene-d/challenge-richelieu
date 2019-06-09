@@ -1,21 +1,23 @@
 #! /bin/bash
 
+cd $(dirname $0)
+
 m()
 {
-    echo -e "\033[32m$@\033[0m"
+    echo -e "\033[1;34m$@\033[0m"
 }
 
 m "alpine gcc"
-gcc-make/build.sh
+gcc-make/build.sh --quiet
 
 m "outils"
-stretch/build.sh
+stretch/build.sh --quiet
 
 m "ctf"
-ctf/build.sh
+ctf/build.sh --quiet
 
 m "ctf-serveur"
-ctf-server/start.sh all build
-ctf-server/start.sh defi1 defi build
-ctf-server/start.sh defi2 defi build
-ctf-server/start.sh defi3 defi build
+ctf-server/start.sh --quiet all norun
+ctf-server/start.sh --quiet defi1 defi norun
+ctf-server/start.sh --quiet defi2 defi norun
+ctf-server/start.sh --quiet defi3 defi norun
