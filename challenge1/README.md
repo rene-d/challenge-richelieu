@@ -83,10 +83,31 @@ pdftotext Richelieu.pdf - | sed '1,8d;/^$/d;s/\x0c//' | base64 -d > data
 
 Rien dans les tags de l'image. En revanche, un `strings data` laisser penser qu'il y a une archive ZIP cachée dans l'image.
 
-Ceci est confirmé par une analyse [stéganographique](https://fr.wikipedia.org/wiki/Stéganographie) de l'image :
+Il ya plusieurs moyens pour extraire le ZIP.
+
+### Avec [binwalk](https://github.com/ReFirmLabs/binwalk) :
+
+```
+$ binwalk -e data
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+445628        0x6CCBC         Zip archive data, encrypted at least v2.0 to extract, compressed size: 264, uncompressed size: 578, name: .bash_history
+445979        0x6CE1B         Zip archive data, encrypted at least v1.0 to extract, compressed size: 343, uncompressed size: 331, name: suite.zip
+446405        0x6CFC5         Zip archive data, encrypted at least v2.0 to extract, compressed size: 455, uncompressed size: 868, name: prime.txt
+446943        0x6D1DF         Zip archive data, encrypted at least v2.0 to extract, compressed size: 643, uncompressed size: 800, name: public.key
+447670        0x6D4B6         Zip archive data, encrypted at least v1.0 to extract, compressed size: 524, uncompressed size: 512, name: motDePasseGPG.txt.enc
+448289        0x6D721         Zip archive data, encrypted at least v2.0 to extract, compressed size: 6244198, uncompressed size: 6243231, name: lsb_RGB.png.enc
+6693156       0x662124        End of Zip archive
+```
+
+### Analyse [stéganographique](https://fr.wikipedia.org/wiki/Stéganographie)
+
+Avec [StegoVeritas](https://github.com/bannsec/stegoVeritas) :
 ```bash
 docker run -it --rm -v $PWD:/work bannsec/stegoveritas stegoveritas /work/data | more
 ```
+
 Pour reconstituer l'archive ZIP de 6247550 octets (_one-liner_) :
 ```bash
 docker run -it --rm -v $PWD:/work bannsec/stegoveritas stegoveritas /work/data | sed '8p;d' | python3 -c "import sys; open('data.zip','wb').write(eval(sys.stdin.read()))"
