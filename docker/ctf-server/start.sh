@@ -18,7 +18,10 @@ docker run -ti --rm -v $PWD:/work -w /work alpine-gcc-make make
 if [[ $1 = "all" ]]
 then
     shift
+
     image=dgse:ctf-server-all
+    more_ports="-p 8080:80"
+
     m "création image ${image}"
     docker build ${quiet} --label challenge_richelieu --tag ${image} -f Dockerfile-all .
 else
@@ -31,7 +34,9 @@ else
         user=defi1
         password=defi
     fi
+
     image=dgse:ctf-server-${user##user}
+    more_ports=""
 
     m "création image ${image} pour user=${user} password=${password}"
     docker build ${quiet} --label challenge_richelieu \
@@ -50,7 +55,7 @@ m "nettoyage ancienne instance"
 docker rm --force ctf_server || true
 
 m "démarrage serveur SSH"
-docker run --name ctf_server -d --rm -p 2222:22 -v /var/run/docker.sock:/var/run/docker.sock ${image}
+docker run --name ctf_server -d --rm -p 2222:22 ${more_ports} -v /var/run/docker.sock:/var/run/docker.sock ${image}
 
 if [[ "$1" == "sh" ]]; then
     m "console sur serveur"

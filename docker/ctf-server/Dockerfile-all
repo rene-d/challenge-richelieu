@@ -1,6 +1,6 @@
 FROM docker:edge
 
-RUN apk add --update openssh ca-certificates
+RUN apk add --update openssh ca-certificates darkhttpd
 
 # regénère les host keys
 RUN rm -rf /etc/ssh/ssh_host_* \
@@ -62,6 +62,10 @@ RUN addgroup --gid "$GID" "$USER" \
 
 # expose le 22 de sshd
 EXPOSE 22
+
+# ajoute le serveur web
+COPY --from=dgse:web / /
+EXPOSE 80
 
 COPY entrypoint /entrypoint
 ENTRYPOINT ["/entrypoint" ]
