@@ -26,7 +26,7 @@ Le script [build-all.sh](build-all.sh) appelle toutes les commandes [docker buil
 
 ☣️ La commande suivante permet de supprimer toutes les images créées pour le challenge :
 ```bash
-docker image ls --filter "label=challenge_richelieu" --format "{{.ID}}" --no-trunc | xargs docker rmi
+docker image ls --filter "label=challenge_richelieu" --format "{{.ID}}" --no-trunc | xargs docker rmi -f
 ```
 
 ### Images utilisées

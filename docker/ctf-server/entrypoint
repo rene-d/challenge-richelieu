@@ -6,7 +6,7 @@
 # lance httpd si présent
 if [[ -f /var/www/index.html ]]
 then
-    /usr/bin/darkhttpd /var/www --chroot --daemon --uid darkhttpd --gid www-data
+    /usr/bin/darkhttpd /var/www --port 8000 --chroot --daemon --uid darkhttpd --gid www-data
 fi
 
 # passe le contrôle à sshd

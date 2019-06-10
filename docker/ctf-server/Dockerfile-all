@@ -64,8 +64,8 @@ RUN addgroup --gid "$GID" "$USER" \
 EXPOSE 22
 
 # ajoute le serveur web
-COPY --from=dgse:web / /
-EXPOSE 80
+ADD web.tar /var/www/
+EXPOSE 8000
 
 COPY entrypoint /entrypoint
 ENTRYPOINT ["/entrypoint" ]

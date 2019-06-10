@@ -10,7 +10,7 @@ else
     one_hour=$(date -d "@$(($(date --utc +%s) - ${MAX_AGE}))" +"%Y-%m-%dT%H:%M:%SZ")
 fi
 
-docker ps --filter "label=defi" --format '{{.ID}}' | xargs -n1 docker container inspect --format='{{.ID}} {{.Created}}' | while read id started_at
+docker ps --filter "label=defi" --format '{{.ID}}' | xargs -r -n1 docker container inspect --format='{{.ID}} {{.Created}}' | while read id started_at
 do
     if [ ${one_hour} \> ${started_at} ]
     then

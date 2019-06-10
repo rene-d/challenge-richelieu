@@ -2,59 +2,35 @@
 
 set -e
 cd $(dirname $0)
-if [[ $1 == --quiet ]]; then quiet=--quiet; shift; else quiet=; fi
 
 m()
 {
     echo -e "\033[32m$@\033[0m"
 }
 
-# compile shell.c avec gcc dockerisé
-m "compilation /bin/ctfsh"
-../gcc-make/build.sh ${quiet}
-docker run -ti --rm -v $PWD:/work -w /work alpine-gcc-make make
+
+m "nettoyage ancienne instance"
+./stop.sh
 
 # construit l'image du server ssh
 if [[ $1 = "all" ]]
 then
     shift
-
     image=dgse:ctf-server-all
-    more_ports="-p 8080:80"
-
-    m "création image ${image}"
-    docker build ${quiet} --label challenge_richelieu --tag ${image} -f Dockerfile-all .
+    more_ports="-p 8000:8000"
 else
     if [[ $1 =~ defi[[:digit:]] ]]
     then
         user=$1
-        password=$2
-        shift 2
+        shift 1
     else
         user=defi1
-        password=defi
     fi
-
     image=dgse:ctf-server-${user##user}
     more_ports=""
-
-    m "création image ${image} pour user=${user} password=${password}"
-    docker build ${quiet} --label challenge_richelieu \
-        --build-arg "USER=${user}" \
-        --build-arg "PASSWORD=${password}" \
-        --tag ${image} .
 fi
 
-if [[ $1 = norun ]]
-then
-    exit
-fi
-
-m "nettoyage ancienne instance"
-./clean-ctf.sh 0
-docker rm --force ctf_server || true
-
-m "démarrage serveur SSH"
+m "démarrage serveur SSH ${image}"
 docker run --name ctf_server -d --rm -p 2222:22 ${more_ports} -v /var/run/docker.sock:/var/run/docker.sock ${image}
 
 if [[ "$1" == "sh" ]]; then

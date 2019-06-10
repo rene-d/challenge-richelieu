@@ -7,7 +7,7 @@ m()
     echo -e "\033[1;34m$@\033[0m"
 }
 
-m "alpine gcc"
+m "alpine gcc make"
 gcc-make/build.sh --quiet
 
 m "outils"
@@ -17,7 +17,7 @@ m "ctf"
 ctf/build.sh --quiet
 
 m "ctf-serveur"
-ctf-server/start.sh --quiet all norun
-ctf-server/start.sh --quiet defi1 defi norun
-ctf-server/start.sh --quiet defi2 defi norun
-ctf-server/start.sh --quiet defi3 defi norun
+ctf-server/build.sh --quiet all
+ctf-server/build.sh --quiet defi1 defi
+ctf-server/build.sh --quiet defi2 defi
+ctf-server/build.sh --quiet defi3 defi

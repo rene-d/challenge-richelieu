@@ -1,6 +1,7 @@
 #! /bin/bash
 
 echo "#!/bin/sh" > docker-images.sh
+echo "docker load -i docker-images.tar" >> docker-images.sh
 
 docker image ls --no-trunc --format '{{.ID}} {{.Repository}}:{{.Tag}}' | while read id target
 do
@@ -10,5 +11,4 @@ done
 
 docker image ls --no-trunc --format '{{.ID}}' | xargs docker save -o docker-images.tar
 
-echo "docker load -i docker-images.tar" >> docker-images.sh
 chmod a+x docker-images.sh

@@ -6,14 +6,14 @@ Ce sont les fichiers qui ont été mis à disposition par les créateurs du chal
 
 Fichier | Taille | MD5
 ------- | ------ | ----
-[challenge1/web/Richelieu.pdf](challenge1/web/Richelieu.pdf) | 9737722 | `b90900747eed2a3c6095aab7185651e5`
+[web/Richelieu.pdf](web/Richelieu.pdf) | 9737722 | `b90900747eed2a3c6095aab7185651e5`
 [defi1/prog.bin](defi1/prog.bin)       |  8752 | `09b14c1d6114bcec12940a46e47f09b7`
 [defi2/prog.bin](defi2/prog.bin)       | 10368 | `52ac18dc0d36b1c926c4220e0dada2de`
 [defi3/prog.bin](defi3/prog.bin)       | 10392 | `645b9ec6c14ff92fb18fde1d911487f5`
 [defi1/drapeau.txt](defi1/drapeau.txt) 🇫🇷 |   133 | `fdab957440cb01668dfff5864fd87f19`
 [defi2/drapeau.txt](defi2/drapeau.txt) 🇫🇷 |   133 | `41f38dc256edbf3b8d82b2875c7d5c22`
 [defi3/drapeau.txt](defi3/drapeau.txt) 🇫🇷 |   564 | `bdd43aa104db67e4a1c99c59e353c5a4`
-le site [web](challenge1/web/) | |
+le site [web](web/) | |
 
 ## Elaboration du challenge
 
