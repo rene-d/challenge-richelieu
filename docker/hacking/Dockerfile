@@ -3,7 +3,7 @@ ARG DISTRO=stretch
 FROM buildpack-deps:$DISTRO
 
 RUN apt-get update \
-&&  apt-get install -y gdb strace ltrace vim upx python-dev poppler-utils ruby \
+&&  apt-get install -y gdb strace ltrace vim upx python-dev poppler-utils ruby binwalk \
 &&  apt-get clean
 
 # pwntools (requier Python 2.7 pour l'instant)

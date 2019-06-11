@@ -74,7 +74,7 @@ Le script [test-all.sh](test-all.sh) enchaine toutes les étapes du challenge.
 * [curl](https://curl.haxx.se)
 * [Python](https://www.python.org) 2 et 3
 * [Poppler](http://poppler.freedesktop.org)
-* [binwalk](https://github.com/ReFirmLabs/binwalk) _(non installé)_
+* [binwalk](https://github.com/ReFirmLabs/binwalk)
 * [StegoVeritas](https://github.com/bannsec/stegoVeritas) _(via un container Docker)_
 * [OpenSSL](http://openssl.org)
 * [GnuPG](https://gnupg.org)
@@ -96,7 +96,7 @@ Ainsi que:
 
 ## Le container Docker utilitaire
 
-L'image Docker [dgse:hacking](docker/hacking/Dockerfiler) est une machine très proche de celles mises à disposition pour les défis. Il permet de tout lancer, quelque soit la machine hôte, les outils ci-dessus ainsi que les binaires `prog.bin` du challenge.
+L'image Docker [dgse:hacking](docker/hacking/Dockerfile) est une machine très proche de celles mises à disposition pour les défis. Le container permet de tout lancer, quelque soit la machine hôte, les outils ci-dessus ainsi que les binaires `prog.bin` du challenge.
 
 Pour créer l'image (dans le répertoire du `Dockerfile`):
 ```bash
