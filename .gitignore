@@ -25,3 +25,5 @@ richelieu.rep/
 /.vscode/ipch/
 
 docker/ctf-server/web.tar
+docker/docker-images.tar*
+docker/docker-images.sh
