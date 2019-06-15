@@ -13,7 +13,7 @@ Le challenge commence par un site web, avec la date de fin du challenge, un comp
 5. [Recherche de la clé privée RSA](#Recherche-de-la-clé-privée-RSA)
 6. [Décryptage de l'image PNG](#Décryptage-de-limage-PNG)
 7. [Analyse de l'image PNG](#Analyse-de-limage-PNG)
-8. [Décompression du programme ELF](#Décompression-du-programme)
+8. [Décompression du binaire ELF](#Décompression-du-binaire-ELF)
 
 ## Exploit
 
@@ -183,7 +183,7 @@ Une clé privée RSA est composée de 9 éléments selon la [RFC 2313](https://w
 
 Le `.bash_history` a révélé 6 modifications par `sed` dans le fichier `prime.txt`. Il faudra en tenir compte lors de la recherche de _prime1_.
 
-Le script Python `findkey.py` rassemble toutes les étapes de recherche et de calculs mathématiques pour reconstituer la clé privée dans le fichier `priv.key`.
+Le script Python [findkey.py](findkey.py) rassemble toutes les étapes de recherche et de calculs mathématiques pour reconstituer la clé privée dans le fichier `priv.key`.
 
 La commande OpenSSL suivante permet de décrypter `motDePasseGPG.txt.enc` :
 ```bash
@@ -223,7 +223,7 @@ zsteg --extract b1,rgb,lsb,yx lsb_RGB.png | tr -cd '[:print:]\n' | grep "^00....
 
 On peut aussi réaliser l'opération avec un script Python : [lsb_rgb.py](lsb_rgb.py) (qui montre bien le principe de stéganographie utilisé).
 
-## Décompression du programme
+## Décompression du binaire ELF
 
 Un coup de `strings` fait ressortir la chaîne de caractères suivante :
 ```
@@ -232,8 +232,7 @@ $Info: This file is packed with the ALD executable packer http://upx.sf.net $
 C'est évidemment `...the UPX executable packer...`. On va changer ALD (_AttrapeLeDrapeau_ !) en UPX.
 
 ```bash
-zsteg --extract b1,rgb,lsb,yx lsb_RGB.png > extract.hex
-cat extract.hex | tr -cd '[:print:]\n' | grep "^00......: " | xxd -r | sed 's/ALD/UPX/g' > prog.bin
+sed -i 's/ALD/UPX/g' prog.bin
 upx -d prog.bin
 chmod a+x prog.bin
 ```

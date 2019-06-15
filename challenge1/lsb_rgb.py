@@ -8,7 +8,7 @@ png = Image.open("lsb_RGB.png")
 pixels = png.load()
 
 print("dimensions: {}x{}".format(png.width, png.height))
-print("max octets dissimulés: {}".format((png.width * png.height * 3) // 8))
+print("max octets: {}".format((png.width * png.height * 3) // 8))
 
 data = bitarray()
 # parcourt les pixels en y puis x
@@ -30,7 +30,7 @@ for line in data.tobytes().split(b'\n'):
         extracted.extend(bytearray.fromhex(line[10:49].decode()))
 
 # écrit les octets extraits
-with open("extract.bin", "wb") as fp:
+with open("prog.bin", "wb") as fp:
     fp.write(extracted)
 
 print("extraction: {} octets".format(len(extracted)))

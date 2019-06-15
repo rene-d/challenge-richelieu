@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 # construit une image Docker qui ressemble aux machines des défis
 # mais avec tous les outils utilisés pour le challenge

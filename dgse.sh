@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 if [[ $1 = serv ]]; then
     docker rm --force ctf-server &> /dev/null

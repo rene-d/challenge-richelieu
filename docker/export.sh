@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 echo "#!/bin/sh" > docker-images.sh
 echo "docker load -i docker-images.tar" >> docker-images.sh
