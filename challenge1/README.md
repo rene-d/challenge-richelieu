@@ -13,7 +13,7 @@ Le challenge commence par un site web, avec la date de fin du challenge, un comp
 5. [Recherche de la clé privée RSA](#Recherche-de-la-clé-privée-RSA)
 6. [Décryptage de l'image PNG](#Décryptage-de-limage-PNG)
 7. [Analyse de l'image PNG](#Analyse-de-limage-PNG)
-8. [Extraction et décompression du programme ELF](#Extraction-et-décompression-du-programme)
+8. [Décompression du programme ELF](#Décompression-du-programme)
 
 ## Exploit
 
@@ -214,22 +214,16 @@ Une recherche "lsb rgb png" avec Google renvoie des liens de stéganographie. De
 zsteg --all --channels rgb --lsb lsb_RGB.png
 ```
 
-## Extraction et décompression du programme
-
-### Extract avec `zsteg`
-
-C'est donc le dump hexadécimal (fait par `xxd`) d'un binaire ELF qui est caché dans l'image, selon le schéma `b1,rgb,lsb,yx`.
-La taille de l'image étant 1562×2424 pixels, on utilise 1 bit de chaque composante R,G,B, on a donc au maximum 1562×2424×3 / 8 = 1419858 octets dissimulés dans l'image.
-L'outil `zsteg` extrait tous ces octets (qui correspondent bien au dump hexadécimal), mais il faut nettoyer avant de convertir en binaire avec `xxd -r`.
+C'est donc le dump hexadécimal (fait par `xxd`) d'un binaire ELF qui est caché dans l'image, selon le schéma `b1,rgb,lsb,yx` (y puis x, 1 bit de chaque composante R,G,B).
+La taille de l'image étant 1562×2424 pixels et en utilisant 3 bits par pixel, on a donc au maximum 1562×2424×3÷8 = 1419858 octets dissimulés dans l'image.
+L'outil `zsteg` extrait tous ces octets (qui correspondent bien au dump hexadécimal), mais il faut nettoyer avant de convertir en binaire avec `xxd -r` : la fin ne fait pas partie de l'information dissimulée.
 ```bash
 zsteg --extract b1,rgb,lsb,yx lsb_RGB.png | tr -cd '[:print:]\n' | grep "^00......: " | xxd -r > prog.bin
 ```
 
-### Méthode alternative
+On peut aussi réaliser l'opération avec un script Python : [lsb_rgb.py](lsb_rgb.py) (qui montre bien le principe de stéganographie utilisé).
 
-On peut facilement réaliser l'opération avec un script Python (`pip3 install Pillow bitarray` est requis) : [lsb_rgb.py](lsb_rgb.py).
-
-### Décompression
+## Décompression du programme
 
 Un coup de `strings` fait ressortir la chaîne de caractères suivante :
 ```
