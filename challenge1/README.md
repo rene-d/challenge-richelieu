@@ -216,7 +216,20 @@ zsteg --all --channels rgb --lsb lsb_RGB.png
 
 ## Extraction et décompression du programme
 
-C'est donc un binaire ELF qui est caché dans l'image, selon le schéma `b1,rgb,lsb,yx`. Malheureusement `zsteg` rajoute du bruit à la fin du fichier extrait, qu'il faut supprimer avant de convertir en binaire avec `xxd -r`.
+### Extract avec `zsteg`
+
+C'est donc le dump hexadécimal (fait par `xxd`) d'un binaire ELF qui est caché dans l'image, selon le schéma `b1,rgb,lsb,yx`.
+La taille de l'image étant 1562×2424 pixels, on utilise 1 bit de chaque composante R,G,B, on a donc au maximum 1562×2424×3 / 8 = 1419858 octets dissimulés dans l'image.
+L'outil `zsteg` extrait tous ces octets (qui correspondent bien au dump hexadécimal), mais il faut nettoyer avant de convertir en binaire avec `xxd -r`.
+```bash
+zsteg --extract b1,rgb,lsb,yx lsb_RGB.png | tr -cd '[:print:]\n' | grep "^00......: " | xxd -r > prog.bin
+```
+
+### Méthode alternative
+
+On peut facilement réaliser l'opération avec un script Python (`pip3 install Pillow bitarray` est requis) : [lsb_rgb.py](lsb_rgb.py).
+
+### Décompression
 
 Un coup de `strings` fait ressortir la chaîne de caractères suivante :
 ```

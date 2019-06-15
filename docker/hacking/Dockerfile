@@ -3,7 +3,7 @@ ARG DISTRO=stretch
 FROM buildpack-deps:$DISTRO
 
 RUN apt-get update \
-&&  apt-get install -y gdb strace ltrace vim upx python-dev poppler-utils ruby binwalk \
+&&  apt-get install -y gdb strace ltrace vim upx python-dev python3-dev poppler-utils ruby binwalk \
 &&  apt-get clean
 
 # pwntools (requier Python 2.7 pour l'instant)
@@ -23,7 +23,7 @@ RUN mkdir -p /opt \
 # pip3, ropper et pyasn1
 RUN curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py \
 &&  python3 /tmp/get-pip.py \
-&&  pip3 install --no-cache-dir ropper pyasn1 \
+&&  pip3 install --no-cache-dir ropper pyasn1 Pillow bitarray \
 &&  rm /tmp/get-pip.py
 
 # villoc: Visualization of heap operations.
