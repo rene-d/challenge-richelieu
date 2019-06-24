@@ -2,7 +2,7 @@
 
 if [[ $1 = serv ]]; then
     docker rm --force ctf-server &> /dev/null
-    docker run --name ctf-server -d --rm -p 2222:22 -v /var/run/docker.sock:/var/run/docker.sock dgse:ctf-server
+    docker run --name ctf-server -d --rm -p 2222:22 -v /var/run/docker.sock:/var/run/docker.sock dgse:ctf-server-all
     exit
 fi
 
@@ -13,7 +13,7 @@ if [[ $1 = stop ]]; then
 fi
 
 if [[ $1 ]]; then
-    docker run --label defi$1 --hostname AttrapeLeDrapeau --network none --rm -ti dgse:defi$1
+    docker run --label defi$1 --hostname AttrapeLeDrapeau --network none --rm -ti --cap-add=SYS_PTRACE dgse:defi$1
     exit
 fi
 

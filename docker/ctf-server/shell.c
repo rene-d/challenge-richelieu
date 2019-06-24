@@ -22,8 +22,9 @@ int main()
         "--label", "defi",
         "--rm",
         "-ti",
-        "--hostname", "AttrapeLeDrapeau",
-        "--network", "none",
+        "--hostname=AttrapeLeDrapeau",
+        "--network=none",
+        "--cap-add=SYS_PTRACE",
         container,
         NULL
     };

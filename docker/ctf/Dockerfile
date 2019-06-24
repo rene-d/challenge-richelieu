@@ -46,4 +46,4 @@ USER ${CTF_USER}
 RUN echo "source /opt/peda-master/peda.py" >> .gdbinit \
 &&  echo "syntax on" >> .vimrc
 
-CMD ["bash"]
+CMD ["bash", "-l"]
