@@ -1,5 +1,10 @@
 #! /usr/bin/env bash
 
+if [[ $1 = . ]]; then
+    docker run --name dgsec --hostname dgsec --rm -ti -v "$PWD":/dgse --cap-add=SYS_PTRACE dgse
+    exit
+fi
+
 if [[ $1 = serv ]]; then
     docker rm --force ctf-server &> /dev/null
     docker run --name ctf-server -d --rm -p 2222:22 -v /var/run/docker.sock:/var/run/docker.sock dgse:ctf-server-all
